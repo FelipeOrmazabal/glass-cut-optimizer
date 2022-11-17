@@ -1,0 +1,684 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:termopanelescco/Models/pedido.dart';
+
+import 'package:termopanelescco/Models/termo.dart';
+
+import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
+import 'package:termopanelescco/Providers/pedido_provider.dart';
+
+import '../Utils/texts_app.dart';
+
+class AgregarPedidoScreen extends StatefulWidget {
+  const AgregarPedidoScreen({Key? key}) : super(key: key);
+
+  @override
+  // ignore: no_logic_in_create_state
+  State<AgregarPedidoScreen> createState() {
+    return _AgregarPedidoScreenState();
+  }
+}
+
+class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
+  List<Termo> termos = [];
+  List<String> vidrioAll = [];
+  List<String> separadorAll = [];
+
+  Future readTermos() async {
+    List<Termo> itemsTermo = [];
+
+    if (itemsTermo.isEmpty) {
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection("termopaneles").get();
+
+      for (var element in snapshot.docs) {
+        itemsTermo.insert(
+            0,
+            Termo(
+                valor: element["valor"],
+                separador: element["separador"],
+                vidrio1: element["vidrio1"],
+                vidrio2: element["vidrio2"]));
+      }
+    }
+    termos = itemsTermo;
+
+    // ignore: await_only_futures
+    for (var item in await termos) {
+      vidrioAll.add(item.vidrio1.toString());
+      vidrioAll.add(item.vidrio2.toString());
+      separadorAll.add(item.separador.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    readTermos();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final detallePedidoP = Provider.of<AgregarDetallePedidoP>(context);
+    final pedidoP = Provider.of<PedidoP>(context);
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
+        appBar: AppBar(
+          leading: BackButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/pedidos', (Route<dynamic> route) => false);
+              detallePedidoP.controllerAlto = [];
+              detallePedidoP.controllerLargo = [];
+              detallePedidoP.controllerCantidad = [];
+              detallePedidoP.controllerCodigo = [];
+              detallePedidoP.controllerCodigos.clear();
+              detallePedidoP.controllerIdentificador.clear();
+              detallePedidoP.controllerM2 = [];
+              detallePedidoP.controllerValorM2 = [];
+              detallePedidoP.controllerTotal.clear();
+              detallePedidoP.controllerPrecio = [];
+              detallePedidoP.currentvalueS = [];
+              detallePedidoP.currentvalueV1 = [];
+              detallePedidoP.currentvalueV2 = [];
+              detallePedidoP.altura = 1;
+              detallePedidoP.alturaS = 8;
+
+              detallePedidoP.count = 0;
+              detallePedidoP.detalle.clear();
+            },
+          ),
+          title: const Text(TextApp.tituloAppbar),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/pedidos');
+                },
+                child: const Text(
+                  TextApp.pedidios,
+                  style: TextStyle(color: Colors.white),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/presupuestos');
+                },
+                child: const Text(
+                  TextApp.presupuestos,
+                  style: TextStyle(color: Colors.white),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/producciones');
+                },
+                child: const Text(
+                  TextApp.produccion,
+                  style: TextStyle(color: Colors.white),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/termopaneles');
+                },
+                child: const Text(
+                  TextApp.productos,
+                  style: TextStyle(color: Colors.white),
+                )),
+          ],
+        ),
+        body: ListView(children: [
+          Stack(
+            children: [
+              Center(
+                child: SizedBox(
+                  height: 68 * detallePedidoP.alturaS,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(top: 30, bottom: 20),
+                          child: const Text(
+                            "Agregar Pedido",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30),
+                          )),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10, bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 80,
+                              child: TextFormField(
+                                  controller: detallePedidoP.controllerCodigos,
+                                  decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Codigo")),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 500,
+                              child: TextFormField(
+                                  controller:
+                                      detallePedidoP.controllerIdentificador,
+                                  decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Identificador Pedido")),
+                            ),
+                            const SizedBox(
+                              height: 1,
+                              width: 50,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Card(
+                        color: const Color.fromARGB(255, 226, 226, 226),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: const [
+                              Text("codigo          ",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("vidrio 1", style: TextStyle(fontSize: 17)),
+                              Text("separador", style: TextStyle(fontSize: 17)),
+                              Text("vidrio 2", style: TextStyle(fontSize: 17)),
+                              Text("                          largo mm",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("alto mm", style: TextStyle(fontSize: 17)),
+                              Text("   cantidad",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("M^2", style: TextStyle(fontSize: 17)),
+                              Text("valor M^2", style: TextStyle(fontSize: 17)),
+                              Text("precio", style: TextStyle(fontSize: 17)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        child: SizedBox(
+                          height: 68 * detallePedidoP.altura,
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: ListView.separated(
+                            itemCount: detallePedidoP.count,
+                            itemBuilder: (BuildContext context, int index) {
+                              detallePedidoP.codigos(
+                                  detallePedidoP.controllerCodigos.text);
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                    width: 80,
+                                    child: TextFormField(
+                                        controller: detallePedidoP
+                                            .controllerCodigo[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                      height: 50,
+                                      width: 158,
+                                      child: DropdownButtonFormField(
+                                        value:
+                                            vidrioAll.toSet().first.toString(),
+                                        items: vidrioAll
+                                            .toSet()
+                                            .map((items) => DropdownMenuItem(
+                                                  child: Text(items),
+                                                  value: items,
+                                                ))
+                                            .toList(),
+                                        onChanged: (value) {
+                                          detallePedidoP.currentvalueV1[index] =
+                                              value.toString();
+                                          for (var item in termos) {
+                                            if (detallePedidoP.currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio2 ||
+                                                detallePedidoP.currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio2) {
+                                              detallePedidoP
+                                                  .controllerValorM2[index]
+                                                  .text = item.valor.toString();
+                                            }
+                                          }
+                                        },
+                                      )),
+                                  SizedBox(
+                                      height: 50,
+                                      width: 158,
+                                      child: DropdownButtonFormField(
+                                        value: separadorAll
+                                            .toSet()
+                                            .first
+                                            .toString(),
+                                        items: separadorAll
+                                            .toSet()
+                                            .map((items) => DropdownMenuItem(
+                                                  child: Text(items),
+                                                  value: items,
+                                                ))
+                                            .toList(),
+                                        onChanged: (value) {
+                                          detallePedidoP.currentvalueS[index] =
+                                              value.toString();
+                                          for (var item in termos) {
+                                            if (detallePedidoP.currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio2 ||
+                                                detallePedidoP.currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio2) {
+                                              detallePedidoP
+                                                  .controllerValorM2[index]
+                                                  .text = item.valor.toString();
+                                            }
+                                          }
+                                        },
+                                      )),
+                                  SizedBox(
+                                      height: 50,
+                                      width: 158,
+                                      child: DropdownButtonFormField(
+                                        value:
+                                            vidrioAll.toSet().first.toString(),
+                                        items: vidrioAll
+                                            .toSet()
+                                            .map((items) => DropdownMenuItem(
+                                                  child: Text(items),
+                                                  value: items,
+                                                ))
+                                            .toList(),
+                                        onChanged: (value) {
+                                          detallePedidoP.currentvalueV2[index] =
+                                              value.toString();
+                                          for (var item in termos) {
+                                            if (detallePedidoP.currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio2 ||
+                                                detallePedidoP.currentvalueV2[
+                                                            index] ==
+                                                        item.vidrio1 &&
+                                                    detallePedidoP
+                                                                .currentvalueS[
+                                                            index] ==
+                                                        item.separador &&
+                                                    detallePedidoP
+                                                                .currentvalueV1[
+                                                            index] ==
+                                                        item.vidrio2) {
+                                              detallePedidoP
+                                                  .controllerValorM2[index]
+                                                  .text = item.valor.toString();
+                                            }
+                                          }
+                                        },
+                                      )),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 120,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          double m2 = (int.parse(detallePedidoP
+                                                  .controllerLargo[index]
+                                                  .text) *
+                                              int.parse(detallePedidoP
+                                                  .controllerAlto[index].text) /
+                                              1000000);
+                                          detallePedidoP.controllerM2[index]
+                                              .text = m2.toString();
+                                          double precio = (double.parse(
+                                                      detallePedidoP
+                                                          .controllerM2[index]
+                                                          .text) *
+                                                  int.parse(detallePedidoP
+                                                      .controllerValorM2[index]
+                                                      .text)) *
+                                              int.parse(detallePedidoP
+                                                  .controllerCantidad[index]
+                                                  .text);
+
+                                          detallePedidoP.controllerPrecio[index]
+                                              .text = precio.toString();
+                                          detallePedidoP.total();
+                                        },
+                                        controller: detallePedidoP
+                                            .controllerLargo[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 120,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          double m2 = (int.parse(detallePedidoP
+                                                  .controllerLargo[index]
+                                                  .text) *
+                                              int.parse(detallePedidoP
+                                                  .controllerAlto[index].text) /
+                                              1000000);
+                                          detallePedidoP.controllerM2[index]
+                                              .text = m2.toString();
+                                          double precio = (double.parse(
+                                                      detallePedidoP
+                                                          .controllerM2[index]
+                                                          .text) *
+                                                  int.parse(detallePedidoP
+                                                      .controllerValorM2[index]
+                                                      .text)) *
+                                              int.parse(detallePedidoP
+                                                  .controllerCantidad[index]
+                                                  .text);
+
+                                          detallePedidoP.controllerPrecio[index]
+                                              .text = precio.toStringAsFixed(0);
+                                          detallePedidoP.total();
+                                        },
+                                        controller: detallePedidoP
+                                            .controllerAlto[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 100,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          double precio = (double.parse(
+                                                      detallePedidoP
+                                                          .controllerM2[index]
+                                                          .text) *
+                                                  int.parse(detallePedidoP
+                                                      .controllerValorM2[index]
+                                                      .text)) *
+                                              int.parse(detallePedidoP
+                                                  .controllerCantidad[index]
+                                                  .text);
+
+                                          detallePedidoP.controllerPrecio[index]
+                                              .text = precio.toStringAsFixed(0);
+                                          detallePedidoP.total();
+                                        },
+                                        controller: detallePedidoP
+                                            .controllerCantidad[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 80,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          double precio = (double.parse(
+                                                      detallePedidoP
+                                                          .controllerM2[index]
+                                                          .text) *
+                                                  int.parse(detallePedidoP
+                                                      .controllerValorM2[index]
+                                                      .text)) *
+                                              int.parse(detallePedidoP
+                                                  .controllerCantidad[index]
+                                                  .text);
+
+                                          detallePedidoP.controllerPrecio[index]
+                                              .text = precio.toStringAsFixed(0);
+                                        },
+                                        controller:
+                                            detallePedidoP.controllerM2[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 100,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          double precio = (double.parse(
+                                                      detallePedidoP
+                                                          .controllerM2[index]
+                                                          .text) *
+                                                  int.parse(detallePedidoP
+                                                      .controllerValorM2[index]
+                                                      .text)) *
+                                              int.parse(detallePedidoP
+                                                  .controllerCantidad[index]
+                                                  .text);
+
+                                          detallePedidoP.controllerPrecio[index]
+                                              .text = precio.toStringAsFixed(0);
+
+                                          detallePedidoP.total();
+                                        },
+                                        controller: detallePedidoP
+                                            .controllerValorM2[index],
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                    width: 100,
+                                    child: TextFormField(
+                                        onChanged: (value) {
+                                          detallePedidoP.total();
+                                        },
+                                        controller: detallePedidoP
+                                            .controllerPrecio[index],
+
+                                        // controller: controllerValor,
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                        )),
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const Divider();
+                            },
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            alignment: Alignment.bottomRight,
+                            child: FloatingActionButton(
+                                heroTag: "caca",
+                                child: const Icon(Icons.delete),
+                                onPressed: () {
+                                  detallePedidoP.deleteFila();
+                                }),
+                          ),
+                          Container(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                  child: const Icon(Icons.add),
+                                  onPressed: () {
+                                    detallePedidoP.addFila(
+                                      vidrioAll.toSet().first.toString(),
+                                      vidrioAll.toSet().first.toString(),
+                                      separadorAll.toSet().first.toString(),
+                                    );
+                                    for (var item in termos) {
+                                      if (detallePedidoP.currentvalueV1[detallePedidoP.count - 1] ==
+                                                  item.vidrio1 &&
+                                              detallePedidoP.currentvalueS[
+                                                      detallePedidoP.count -
+                                                          1] ==
+                                                  item.separador &&
+                                              detallePedidoP.currentvalueV2[
+                                                      detallePedidoP.count -
+                                                          1] ==
+                                                  item.vidrio2 ||
+                                          detallePedidoP.currentvalueV2[detallePedidoP.count - 1] ==
+                                                  item.vidrio1 &&
+                                              detallePedidoP.currentvalueS[
+                                                      detallePedidoP.count -
+                                                          1] ==
+                                                  item.separador &&
+                                              detallePedidoP
+                                                      .currentvalueV1[detallePedidoP.count - 1] ==
+                                                  item.vidrio2) {
+                                        detallePedidoP
+                                            .controllerValorM2[
+                                                detallePedidoP.count - 1]
+                                            .text = item.valor.toString();
+                                      }
+                                    }
+                                  })),
+                          Container(
+                            margin: const EdgeInsets.only(right: 3),
+                            child: SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: TextFormField(
+                                  controller: detallePedidoP.controllerTotal,
+                                  decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: "Total")),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                              margin: const EdgeInsets.only(top: 20),
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    detallePedidoP.agregarDetalle();
+
+                                    final pedido = Pedido(
+                                        identificador: detallePedidoP
+                                            .controllerIdentificador.text,
+                                        fecha: DateTime.now(),
+                                        detallePedido: detallePedidoP.detalle,
+                                        total: double.parse(detallePedidoP
+                                            .controllerTotal.text),
+                                        usuario: detallePedidoP
+                                            .controllerIdentificador.text);
+
+                                    pedidoP.addPedido(pedido);
+                                    // presupuestoP.addPresupuesto(pedido);
+
+                                    detallePedidoP.controllerAlto = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerLargo = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerCantidad = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerCodigo = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerCodigos.clear();
+                                    detallePedidoP.controllerIdentificador
+                                        .clear();
+                                    detallePedidoP.controllerM2 = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerValorM2 = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.controllerTotal.clear();
+                                    detallePedidoP.controllerPrecio = [
+                                      TextEditingController()
+                                    ];
+                                    detallePedidoP.currentvalueS = [
+                                      "currentValueS"
+                                    ];
+                                    detallePedidoP.currentvalueV1 = [
+                                      "currentValueV1"
+                                    ];
+                                    detallePedidoP.currentvalueV2 = [
+                                      "currentValueV2"
+                                    ];
+                                    detallePedidoP.altura = 1;
+                                    detallePedidoP.alturaS = 8;
+
+                                    detallePedidoP.count = 0;
+                                    detallePedidoP.detalle.clear();
+
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/pedidos',
+                                            (Route<dynamic> route) => false);
+                                  },
+                                  child: const Text(
+                                    "Guardar Pedido / Generar Pesupuesto",
+                                    style: TextStyle(fontSize: 20),
+                                  ))),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ]),
+      ),
+    );
+  }
+}
