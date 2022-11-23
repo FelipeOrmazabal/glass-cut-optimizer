@@ -79,7 +79,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
       }
     }
 
-    vidrios1;
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
