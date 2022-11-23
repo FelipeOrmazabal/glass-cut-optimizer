@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:termopanelescco/Models/pedido.dart';
-
 import 'package:termopanelescco/Models/termo.dart';
-
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
-
 import '../Utils/texts_app.dart';
 
 class AgregarPedidoScreen extends StatefulWidget {
@@ -78,7 +75,6 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
         }
       }
     }
-
 
     return WillPopScope(
       onWillPop: () async => false,
