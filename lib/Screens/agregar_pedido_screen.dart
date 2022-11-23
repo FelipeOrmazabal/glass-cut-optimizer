@@ -42,7 +42,6 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                 vidrio2: element["vidrio2"]));
       }
     }
-    termos = itemsTermo;
 
     // ignore: await_only_futures
     for (var item in await termos) {
@@ -398,8 +397,6 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                                         },
                                         controller: detallePedidoP
                                             .controllerPrecio[index],
-
-                                        // controller: controllerValor,
                                         decoration: const InputDecoration(
                                           border: OutlineInputBorder(),
                                         )),
