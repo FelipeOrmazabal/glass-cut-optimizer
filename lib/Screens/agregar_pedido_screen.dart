@@ -6,6 +6,7 @@ import 'package:termopanelescco/Models/termo.dart';
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import '../Utils/texts_app.dart';
+//prueba3
 
 class AgregarPedidoScreen extends StatefulWidget {
   const AgregarPedidoScreen({Key? key}) : super(key: key);
