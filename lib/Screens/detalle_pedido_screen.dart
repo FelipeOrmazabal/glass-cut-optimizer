@@ -19,7 +19,6 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
   Widget build(BuildContext context) {
     Pedido? pedido = widget.pedido;
    
-//prueba 2
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
       appBar: const PreferredSize(
