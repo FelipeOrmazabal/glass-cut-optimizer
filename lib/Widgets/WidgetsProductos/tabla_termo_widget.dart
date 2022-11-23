@@ -113,7 +113,7 @@ final controllerValor = TextEditingController( text: termos.valor.toString() );
       stream: TermoP().read(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text("wad");
+          return Text(snapshot.hasError.toString());
         } else if (snapshot.hasData) {
           final data = snapshot.data;
 
@@ -205,9 +205,9 @@ final controllerValor = TextEditingController( text: termos.valor.toString() );
                     .toList());
           }
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          //aqui lo que aparece mientras carga la informacion
+         return const Center();
+          
         }
       },
     );
