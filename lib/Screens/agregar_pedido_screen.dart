@@ -144,7 +144,6 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                   style: TextStyle(color: Colors.white),
                 )),
           ],
-          //Cambios para verificar control de verisones
         ),
         body: ListView(children: [
           Stack(
@@ -177,6 +176,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                                       border: OutlineInputBorder(),
                                       labelText: "Codigo")),
                             ),
+                            //cambio
                             SizedBox(
                               height: 50,
                               width: 500,
