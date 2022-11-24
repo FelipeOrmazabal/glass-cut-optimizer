@@ -9,7 +9,7 @@
 .history
 .svn/
 pubspec.lock
-/windows/flutter/*
+/windows/
 
 # IntelliJ related
 *.iml
