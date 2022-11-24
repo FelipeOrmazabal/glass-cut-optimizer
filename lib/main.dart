@@ -16,10 +16,7 @@ import 'package:termopanelescco/Screens/presupuestos_screen.dart';
 import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
 
-
-
 import 'Providers/termo_provider.dart';
-
 
 Future main() async {
 //Coneccion a Firestore
@@ -43,17 +40,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-    
         ChangeNotifierProvider(create: (_) => TermoP()),
         ChangeNotifierProvider(create: (_) => AgregarDetallePedidoP()),
         ChangeNotifierProvider(create: (_) => PedidoP()),
         ChangeNotifierProvider(create: (_) => PresupuestoP()),
         ChangeNotifierProvider(create: (_) => DetalleProduccionP()),
-       
       ],
       child: MaterialApp(
         scrollBehavior: MyCustomScrollBehavior(),
-        title: 'Flutter Demo',
+        title: 'Sistema de Gestión TermoPaneles',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: const Color(0xff1976d2),
@@ -69,14 +64,11 @@ class MyApp extends StatelessWidget {
         //rutas de Screens de APP
         routes: {
           '/home': (context) => const HomeScreen(),
-       
           '/termopaneles': (context) => const TermopanelesScreen(),
           '/pedidos': (context) => const PedidosScreen(),
-          '/pedidos/agregarpedido': (context) =>   const AgregarPedidoScreen(),
-   
+          '/pedidos/agregarpedido': (context) => const AgregarPedidoScreen(),
           '/presupuestos': (context) => const PresupuestosScreen(),
           '/producciones': (context) => const ProduccionesScreen(),
-          
         },
         home: const HomeScreen(),
       ),
