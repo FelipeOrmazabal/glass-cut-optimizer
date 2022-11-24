@@ -8,6 +8,8 @@
 .buildlog/
 .history
 .svn/
+pubspec.lock
+\windows\flutter\*
 
 # IntelliJ related
 *.iml
