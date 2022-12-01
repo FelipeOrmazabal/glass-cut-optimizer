@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Termopanelescco',
         scrollBehavior: MyCustomScrollBehavior(),
-        title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
 
         theme: ThemeData(
