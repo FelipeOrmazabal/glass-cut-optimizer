@@ -47,19 +47,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => DetalleProduccionP()),
       ],
       child: MaterialApp(
+        title: 'Termopanelescco',
         scrollBehavior: MyCustomScrollBehavior(),
-        title: 'Sistema de Gestión TermoPaneles',
+        title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
+
         theme: ThemeData(
-            primaryColor: const Color(0xff1976d2),
-            primaryColorDark: const Color(0xff004ba0),
-            primaryColorLight: const Color(0xff63a4ff),
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-              secondary: const Color(0xffb0bec5),
-              secondaryContainer: const Color(0xff808e95),
-            ),
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity),
+            brightness: Brightness.dark, primaryColor: Colors.blueGrey),
+
         initialRoute: '/',
         //rutas de Screens de APP
         routes: {

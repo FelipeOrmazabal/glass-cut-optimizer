@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../Widgets/appbar_widget.dart';
 
-
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -37,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(color: Colors.blueAccent),
+          border: Border.all(color: Color.fromARGB(255, 52, 85, 192)),
         ),
         child: SizedBox(
           width: 400,
@@ -52,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue),
+                      color: Colors.red),
                 ),
               ),
               Row(
@@ -80,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     bottom: 50,
                   ),
                   child: TextFormField(
-                    obscureText: true,
+                      obscureText: true,
                       controller: password,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -89,12 +87,9 @@ class HomeScreen extends StatelessWidget {
                   height: 40,
                   child: ElevatedButton(
                       onPressed: () {
-                      
                         if (password.text == "leica666" &&
                             usuario.text == "admin") {
                           Navigator.pushNamed(context, "/pedidos");
-                             
-                            
                         } else {
                           showDialog(
                               context: context,
