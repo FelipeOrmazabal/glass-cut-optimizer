@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
-          border: Border.all(color: Color.fromARGB(255, 52, 85, 192)),
+          border: Border.all(color: const Color.fromARGB(255, 52, 85, 192)),
         ),
         child: SizedBox(
           width: 400,
