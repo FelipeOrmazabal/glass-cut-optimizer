@@ -4,20 +4,22 @@ import 'package:flutter/material.dart';
 
 import '../Widgets/appbar_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final usuario = TextEditingController();
     final password = TextEditingController();
+    final passwordconfirm = TextEditingController();
     Widget popUp() {
       return const Dialog(
         child: const SizedBox(
             height: 150,
             width: 300,
             child: Center(
-              child: const Text("Usuaio o Contraseña Incorrecta"),
+              child: const Text(
+                  "Por favor verificar que las contraseñas coincidan"),
             )),
       );
     }
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               const ListTile(
                 title: Text(
-                  "Bienvenido Inicia Sesion",
+                  "Registrar Usuario",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 25,
@@ -75,7 +77,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                   padding: const EdgeInsets.only(
                     top: 10,
-                    bottom: 50,
+                    bottom: 10,
                   ),
                   child: TextFormField(
                       obscureText: true,
@@ -83,12 +85,32 @@ class HomeScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ))),
+              Row(
+                children: const [
+                  Icon(Icons.repeat),
+                  Text("  Confirmar Contraseña"),
+                ],
+              ),
+              Container(
+                  padding: const EdgeInsets.only(
+                    top: 0,
+                    bottom: 10,
+                  ),
+                  child: TextFormField(
+                      obscureText: true,
+                      controller: passwordconfirm,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                      ))),
               SizedBox(
                   height: 40,
                   child: ElevatedButton(
+                      //solo esta confirmando que las contraseñas sean la misma
                       onPressed: () {
-                        if (password.text == "leica666" &&
-                            usuario.text == "admin") {
+                        if (password.text == passwordconfirm.text &&
+                            usuario.text.isNotEmpty &&
+                            password.text.isNotEmpty &&
+                            passwordconfirm.text.isNotEmpty) {
                           Navigator.pushNamed(context, "/pedidos");
                         } else {
                           showDialog(
@@ -98,30 +120,7 @@ class HomeScreen extends StatelessWidget {
                               });
                         }
                       },
-                      child: const Text("Ingresar"))),
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "¿No eres usuario de la aplicación?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, "/register");
-                    },
-                    child: Text(
-                      "  ¡¡¡Registrate ahora!!!",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                      child: const Text("Registrar"))),
             ],
           ),
         ),

@@ -9,7 +9,7 @@ import 'package:termopanelescco/Providers/detalle_produccion_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import 'package:termopanelescco/Providers/presupuesto_provider.dart';
 import 'package:termopanelescco/Screens/agregar_pedido_screen.dart';
-
+import 'Screens/register_screen.dart';
 import 'package:termopanelescco/Screens/home_screen.dart';
 import 'package:termopanelescco/Screens/pedidos_screen.dart';
 import 'package:termopanelescco/Screens/presupuestos_screen.dart';
@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
         //rutas de Screens de APP
         routes: {
           '/home': (context) => const HomeScreen(),
+          '/register': (context) => const RegisterScreen(),
           '/termopaneles': (context) => const TermopanelesScreen(),
           '/pedidos': (context) => const PedidosScreen(),
           '/pedidos/agregarpedido': (context) => const AgregarPedidoScreen(),
