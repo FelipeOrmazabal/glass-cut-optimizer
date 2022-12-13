@@ -17,8 +17,6 @@ import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Providers/termo_provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 Future main() async {
 //Coneccion a Firestore
@@ -73,7 +71,13 @@ class MyApp extends StatelessWidget {
           '/presupuestos': (context) => const PresupuestosScreen(),
           '/producciones': (context) => const ProduccionesScreen(),
         },
-        home: const HomeScreen(),
+        home: StreamBuilder<User?>(builder: ((context, snapshot) {
+          if (snapshot.hasData) {
+            return PedidosScreen();
+          } else {
+            return HomeScreen();
+          }
+        })),
       ),
     );
   }

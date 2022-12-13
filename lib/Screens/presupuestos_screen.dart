@@ -19,9 +19,8 @@ class _PresupuestosScreenState extends State<PresupuestosScreen> {
   Future<List<Pedido>> readPresupuestos() async {
     List<Pedido> itemsPresupuesto = [];
 
-    QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection("presupuestos")
-        .get();
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection("presupuestos").get();
 
     for (var element in snapshot.docs) {
       itemsPresupuesto.insert(
@@ -89,7 +88,7 @@ class _PresupuestosScreenState extends State<PresupuestosScreen> {
 
                         // import de Widgets/widgetsProductos/tabla_widget
                         child: SizedBox(
-                           height: MediaQuery.of(context).size.height* 0.8, 
+                            height: MediaQuery.of(context).size.height * 0.8,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: FutureBuilder(
                               future: readPresupuestos(),
@@ -101,11 +100,10 @@ class _PresupuestosScreenState extends State<PresupuestosScreen> {
                                       color: const Color.fromARGB(
                                           255, 201, 203, 213),
                                       child: ListTile(
-                                        subtitle:   Text(pedido.fecha.toString()),
+                                        subtitle: Text(pedido.fecha.toString()),
                                         trailing: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                          
                                             TextButton(
                                                 onPressed: () {
                                                   Navigator.of(context).push(

@@ -1,9 +1,5 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../Widgets/appbar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,16 +29,10 @@ class HomeScreen extends StatelessWidget {
     //void dispose() {
     //  usuario.dispose();
     //  password.dispose();
-    //  super.dispose();
+    //  //super.dispose();
     //}
 
     return Scaffold(
-      // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
-      //appBar: const PreferredSize(
-      //  preferredSize: Size.fromHeight(56),
-      //  child: const AppBarWidget(),
-      //),
-
       body: Center(
           child: Container(
         margin: const EdgeInsets.all(15.0),
@@ -102,42 +92,9 @@ class HomeScreen extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () {
                         signIn();
-
-                        //if (password.text == "leica666" &&
-                        //    usuario.text == "admin") {
-                        //  Navigator.pushNamed(context, "/pedidos");
-                        //} else {
-                        //  showDialog(
-                        //      context: context,
-                        //      builder: (BuildContext context) {
-                        //        return popUp();
-                        //      });
                       },
-                      //},
                       child: const Text("Ingresar"))),
               SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "¿No eres usuario de la aplicación?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, "/register");
-                    },
-                    child: Text(
-                      "  ¡¡¡Registrate ahora!!!",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),
