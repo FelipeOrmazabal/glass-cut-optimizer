@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:termopanelescco/Models/columna.dart';
 import 'package:termopanelescco/Models/fila.dart';
@@ -225,6 +227,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
           ));
     }
 
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
       appBar: const PreferredSize(
@@ -282,7 +285,6 @@ class _PedidosScreenState extends State<PedidosScreen> {
                               builder: (context, AsyncSnapshot<List> snapshot) {
                                 List pedidos = snapshot.data ?? [];
 
-                                
                                 return Column(children: [
                                   for (Pedido pedido in pedidos)
                                     Card(
@@ -348,6 +350,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 ]);
                               },
                             ))),
+                    Text('Hola ' + user.email!),
                   ],
                 ),
               ),

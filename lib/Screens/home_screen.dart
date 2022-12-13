@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Widgets/appbar_widget.dart';
@@ -11,23 +12,36 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final usuario = TextEditingController();
     final password = TextEditingController();
-    Widget popUp() {
-      return const Dialog(
-        child: const SizedBox(
-            height: 150,
-            width: 300,
-            child: Center(
-              child: const Text("Usuaio o Contraseña Incorrecta"),
-            )),
-      );
+    //Widget popUp() {
+    //  return const Dialog(
+    //    child: const SizedBox(
+    //        height: 150,
+    //        width: 300,
+    //        child: Center(
+    //          child: const Text("Usuaio o Contraseña Incorrecta"),
+    //        )),
+    //  );
+    //}
+
+    Future signIn() async {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: usuario.text.trim(), password: password.text.trim());
+      Navigator.pushNamed(context, "/pedidos");
     }
+
+    //@override
+    //void dispose() {
+    //  usuario.dispose();
+    //  password.dispose();
+    //  super.dispose();
+    //}
 
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(56),
-        child: const AppBarWidget(),
-      ),
+      //appBar: const PreferredSize(
+      //  preferredSize: Size.fromHeight(56),
+      //  child: const AppBarWidget(),
+      //),
 
       body: Center(
           child: Container(
@@ -87,17 +101,19 @@ class HomeScreen extends StatelessWidget {
                   height: 40,
                   child: ElevatedButton(
                       onPressed: () {
-                        if (password.text == "leica666" &&
-                            usuario.text == "admin") {
-                          Navigator.pushNamed(context, "/pedidos");
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return popUp();
-                              });
-                        }
+                        signIn();
+
+                        //if (password.text == "leica666" &&
+                        //    usuario.text == "admin") {
+                        //  Navigator.pushNamed(context, "/pedidos");
+                        //} else {
+                        //  showDialog(
+                        //      context: context,
+                        //      builder: (BuildContext context) {
+                        //        return popUp();
+                        //      });
                       },
+                      //},
                       child: const Text("Ingresar"))),
               SizedBox(height: 30),
               Row(

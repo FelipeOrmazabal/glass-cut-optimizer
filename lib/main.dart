@@ -15,21 +15,28 @@ import 'package:termopanelescco/Screens/pedidos_screen.dart';
 import 'package:termopanelescco/Screens/presupuestos_screen.dart';
 import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'Providers/termo_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future main() async {
 //Coneccion a Firestore
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      //datos de coneccion
-      options: const FirebaseOptions(
-          apiKey: "",
-          appId: "1:804231441180:android:e9acf63d5d5f0385aa68d9",
-          messagingSenderId: "",
-          projectId: "termopanelescurico-8d6aa"));
-  runApp(const MyApp());
+    //datos de coneccion
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyASVHU2Uyv1qmRlKmTbEfxBuiTP9ijMQ7I",
+      authDomain: "glowing-service-368612.firebaseapp.com",
+      projectId: "glowing-service-368612",
+      storageBucket: "glowing-service-368612.appspot.com",
+      messagingSenderId: "383193845980",
+      appId: "1:383193845980:web:11797bf5fa42e3234aa419",
+    ),
+  );
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -52,7 +59,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
 
         theme: ThemeData(
-            brightness: Brightness.dark, primaryColor: Colors.blueGrey),
+            brightness: Brightness.dark,
+            primaryColor: Color.fromARGB(255, 96, 139, 127)),
 
         initialRoute: '/',
         //rutas de Screens de APP
