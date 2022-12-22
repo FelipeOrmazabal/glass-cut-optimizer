@@ -9,6 +9,7 @@ import 'package:termopanelescco/Providers/detalle_produccion_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import 'package:termopanelescco/Providers/presupuesto_provider.dart';
 import 'package:termopanelescco/Screens/agregar_pedido_screen.dart';
+import 'package:termopanelescco/Screens/shortcut_screen.dart';
 import 'Screens/register_screen.dart';
 import 'package:termopanelescco/Screens/home_screen.dart';
 import 'package:termopanelescco/Screens/pedidos_screen.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
           '/pedidos/agregarpedido': (context) => const AgregarPedidoScreen(),
           '/presupuestos': (context) => const PresupuestosScreen(),
           '/producciones': (context) => const ProduccionesScreen(),
+          '/shortcut': (context) => const ShortcutPage(),
         },
         home: StreamBuilder<User?>(builder: ((context, snapshot) {
           if (snapshot.hasData) {

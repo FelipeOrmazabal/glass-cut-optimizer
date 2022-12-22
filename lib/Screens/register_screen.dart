@@ -1,27 +1,49 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../Widgets/appbar_widget.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
+
+  //Mensaje de confirmación de creación de usuario
+  Widget confirmar() {
+    return const Dialog(
+      child: const SizedBox(
+          height: 150,
+          width: 300,
+          child: Center(
+            child: const Text("Ya se registró usuario"),
+          )),
+    );
+  }
+
+  Widget revisar() {
+    return const Dialog(
+      child: const SizedBox(
+          height: 150,
+          width: 300,
+          child: Center(
+            child: const Text("Revisar información"),
+          )),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final usuario = TextEditingController();
     final password = TextEditingController();
     final passwordconfirm = TextEditingController();
-    Widget popUp() {
-      return const Dialog(
-        child: const SizedBox(
-            height: 150,
-            width: 300,
-            child: Center(
-              child: const Text(
-                  "Por favor verificar que las contraseñas coincidan"),
-            )),
-      );
+
+    Future registrar() async {
+      if (password.text.trim() == passwordconfirm.text.trim()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: usuario.text.trim(),
+          password: password.text.trim(),
+        );
+        Navigator.pushNamed(context, "/home");
+      }
     }
 
     return Scaffold(
@@ -107,18 +129,7 @@ class RegisterScreen extends StatelessWidget {
                   child: ElevatedButton(
                       //solo esta confirmando que las contraseñas sean la misma
                       onPressed: () {
-                        if (password.text == passwordconfirm.text &&
-                            usuario.text.isNotEmpty &&
-                            password.text.isNotEmpty &&
-                            passwordconfirm.text.isNotEmpty) {
-                          Navigator.pushNamed(context, "/pedidos");
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return popUp();
-                              });
-                        }
+                        registrar();
                       },
                       child: const Text("Registrar"))),
             ],
