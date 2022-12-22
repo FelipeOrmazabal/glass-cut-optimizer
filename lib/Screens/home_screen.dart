@@ -20,9 +20,22 @@ class HomeScreen extends StatelessWidget {
     //}
 
     Future signIn() async {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: usuario.text.trim(), password: password.text.trim());
-      Navigator.pushNamed(context, "/pedidos");
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: usuario.text.trim(), password: password.text.trim());
+        Navigator.pushNamed(context, "/pedidos");
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: Text(e.message.toString()),
+            );
+          },
+        );
+      }
     }
 
     //@override

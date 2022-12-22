@@ -38,13 +38,38 @@ class RegisterScreen extends StatelessWidget {
 
     Future registrar() async {
       if (password.text.trim() == passwordconfirm.text.trim()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: usuario.text.trim(),
-          password: password.text.trim(),
+        try {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: usuario.text.trim(),
+            password: password.text.trim(),
+          );
+          Navigator.pushNamed(context, "/home");
+        } on FirebaseAuthException catch (e) {
+          print(e);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Error'),
+                content: Text(e.message.toString()),
+              );
+            },
+          );
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: const Text("Error"),
+                content: Text("Contraseñas no coinciden"));
+          },
         );
-        Navigator.pushNamed(context, "/home");
       }
+      ;
     }
+
+    ;
 
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
