@@ -1,21 +1,17 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/detalle_produccion_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import 'package:termopanelescco/Providers/presupuesto_provider.dart';
 import 'package:termopanelescco/Screens/agregar_pedido_screen.dart';
-
 import 'package:termopanelescco/Screens/home_screen.dart';
 import 'package:termopanelescco/Screens/pedidos_screen.dart';
 import 'package:termopanelescco/Screens/presupuestos_screen.dart';
 import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
-
 import 'Providers/termo_provider.dart';
 
 Future main() async {
@@ -26,9 +22,9 @@ Future main() async {
       //datos de coneccion
       options: const FirebaseOptions(
           apiKey: "",
-          appId: "1:804231441180:android:e9acf63d5d5f0385aa68d9",
+          appId: "1:371198894504:android:442d9e70e29005bb47fd9d",
           messagingSenderId: "",
-          projectId: "termopanelescurico-8d6aa"));
+          projectId: "termopanelescurico-8c7aa"));
   runApp(const MyApp());
 }
 

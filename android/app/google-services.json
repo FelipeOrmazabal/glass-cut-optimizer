@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "804231441180",
-    "project_id": "termopanelescurico-8d6aa",
-    "storage_bucket": "termopanelescurico-8d6aa.appspot.com"
+    "project_number": "371198894504",
+    "project_id": "termopanelescurico-8c7aa",
+    "storage_bucket": "termopanelescurico-8c7aa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:804231441180:android:e9acf63d5d5f0385aa68d9",
+        "mobilesdk_app_id": "1:371198894504:android:442d9e70e29005bb47fd9d",
         "android_client_info": {
           "package_name": "com.example.termopanelescco"
         }
       },
       "oauth_client": [
         {
-          "client_id": "804231441180-m7e4vie0ib9pb6ecup1tcra81jlu18kc.apps.googleusercontent.com",
+          "client_id": "371198894504-otet4sfkbn8h382to2lut83hevdldo1a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-eq7ElGTKvax9eRBb-GGcD_p-pCh2mUQ"
+          "current_key": "AIzaSyCUDAaOLsV8_Cn2frooMHYPDVkaPIltNjs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "804231441180-m7e4vie0ib9pb6ecup1tcra81jlu18kc.apps.googleusercontent.com",
+              "client_id": "371198894504-otet4sfkbn8h382to2lut83hevdldo1a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

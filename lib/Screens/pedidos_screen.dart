@@ -113,21 +113,22 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                     codigo: item.codigo,
                                     largo: item.largo,
                                     alto: item.alto,
-                                    largoV: item.largo! ~/ 3 - 2,
-                                    altoV: item.alto! ~/ 3 - 2,
+                              
                                     cantidad: item.cantidad,
                                     m2: item.m2)
                               ]
                             ]
                           ];
+                       
+
+                          filaO.sort((a, b) => b.alto!.compareTo(a.alto!));
+
+                          listPLancha() {
                           double largo = 0;
                           double alto = 0;
                           int lfila = 0;
-                          int lcol = 0;
+                          int lcol = 0; 
 
-                          filaO.sort((a, b) => b.m2!.compareTo(a.m2!));
-
-                          listPLancha() {
                             final List<Plancha> pla = [];
                             final List<List<Columna>> colu = [[]];
                             final List<List<Fila>> fil = [[]];
@@ -142,8 +143,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
-                                      largoV: filaO[i].largoV,
-                                      altoV: filaO[i].altoV,
+                                    
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
@@ -162,8 +162,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
-                                      largoV: filaO[i].largoV,
-                                      altoV: filaO[i].altoV,
+                                    
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
@@ -183,8 +182,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
-                                      largoV: filaO[i].largoV,
-                                      altoV: filaO[i].altoV,
+                                   
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
