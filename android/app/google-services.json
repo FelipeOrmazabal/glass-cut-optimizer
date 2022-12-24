@@ -1,34 +1,77 @@
 {
   "project_info": {
-    "project_number": "371198894504",
-    "project_id": "termopanelescurico-8c7aa",
-    "storage_bucket": "termopanelescurico-8c7aa.appspot.com"
+    "project_number": "383193845980",
+    "project_id": "glowing-service-368612",
+    "storage_bucket": "glowing-service-368612.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:371198894504:android:442d9e70e29005bb47fd9d",
+        "mobilesdk_app_id": "1:383193845980:android:9048e52f01be18aa4aa419",
         "android_client_info": {
-          "package_name": "com.example.termopanelescco"
+          "package_name": "com.example.demo_firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "371198894504-otet4sfkbn8h382to2lut83hevdldo1a.apps.googleusercontent.com",
+          "client_id": "383193845980-03l46421k4tofmfqj505nbuiurcchs79.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUDAaOLsV8_Cn2frooMHYPDVkaPIltNjs"
+          "current_key": "AIzaSyCKtNyFd7e46G4NyYeDWDp33Mo7cxipCds"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "371198894504-otet4sfkbn8h382to2lut83hevdldo1a.apps.googleusercontent.com",
+              "client_id": "383193845980-03l46421k4tofmfqj505nbuiurcchs79.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "383193845980-76pc4lc6030u9mj0fhqagur2hj5g7ock.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.demoFirebase"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383193845980:android:699df5c16cfc895d4aa419",
+        "android_client_info": {
+          "package_name": "com.example.termopanelescco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383193845980-03l46421k4tofmfqj505nbuiurcchs79.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKtNyFd7e46G4NyYeDWDp33Mo7cxipCds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383193845980-03l46421k4tofmfqj505nbuiurcchs79.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "383193845980-76pc4lc6030u9mj0fhqagur2hj5g7ock.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.demoFirebase"
+              }
             }
           ]
         }

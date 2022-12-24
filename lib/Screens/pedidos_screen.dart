@@ -239,7 +239,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
 
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
-      appBar: const PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(56),
         child: AppBarWidget(),
       ),
