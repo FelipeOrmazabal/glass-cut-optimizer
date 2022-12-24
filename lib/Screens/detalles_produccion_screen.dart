@@ -62,8 +62,8 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
         Expanded(
             child: ListView(scrollDirection: Axis.horizontal, children: 
        
-             produccion.plancha
-                  ?.map(
+             produccion.plancha?.reversed
+                  .map(
                     (plancha) => Stack(
                       children:[ Container(
                         decoration: BoxDecoration(
@@ -74,10 +74,10 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
                           height: produccion.altoPLancha / 3,
                           width: produccion.largoPlancha / 3 + 8,
                           child: Column(
-                              children: plancha.columna
+                              children: plancha.columna.reversed
                                   .map(
                                     (columna) => Row(
-                                      children: columna.fila
+                                      children: columna.fila.reversed
                                           .map(
                                             (fila) => Stack(children: [
                                               Container(
@@ -86,8 +86,8 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
                                                         color: Colors.black,
                                                         width: 1)),
                                                 child:  SizedBox(
-                                                  height: fila.altoV as double,
-                                                  width: fila.largoV as double,
+                                                  height: fila.alto! / 3,
+                                                  width: fila.largo! / 3,
                                                   child: Center(
                                                     child: Container(
                                                       color: const Color.fromARGB(255, 235, 235, 235),

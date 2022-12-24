@@ -8,34 +8,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final usuario = TextEditingController();
     final password = TextEditingController();
-    //Widget popUp() {
-    //  return const Dialog(
-    //    child: const SizedBox(
-    //        height: 150,
-    //        width: 300,
-    //        child: Center(
-    //          child: const Text("Usuaio o Contraseña Incorrecta"),
-    //        )),
-    //  );
-    //}
-
-    Future signIn() async {
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: usuario.text.trim(), password: password.text.trim());
-        Navigator.pushNamed(context, "/shortcut");
-      } on FirebaseAuthException catch (e) {
-        print(e);
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: Text(e.message.toString()),
-            );
-          },
-        );
-      }
+    Widget popUp() {
+      return const Dialog(
+        child: const SizedBox(
+            height: 150,
+            width: 300,
+            child: Center(
+              child: const Text("Usuaio o Contraseña Incorrecta"),
+            )),
+      );
     }
 
     //@override
@@ -51,23 +32,30 @@ class HomeScreen extends StatelessWidget {
         margin: const EdgeInsets.all(15.0),
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
+          image: const DecorationImage(
+            image: AssetImage("assets/Imagen1.png"),
+            scale: 1.5,
+            fit: BoxFit.none,
+            colorFilter: ColorFilter.mode(Colors.transparent, BlendMode.color),
+            alignment: Alignment(-0.0, -0.7),
+          ),
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: Border.all(color: const Color.fromARGB(255, 52, 85, 192)),
         ),
         child: SizedBox(
           width: 400,
-          height: 400,
+          height: 500,
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
               const ListTile(
                 title: Text(
-                  "Bienvenido Inicia Sesion",
+                  "Bienvenido a Termopaneles Curicó\n\n\n\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red),
+                      fontSize: 21,
+                      fontWeight: FontWeight.w100,
+                      color: Colors.white),
                 ),
               ),
               Row(

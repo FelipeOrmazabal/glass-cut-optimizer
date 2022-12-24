@@ -1,22 +1,19 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/detalle_produccion_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import 'package:termopanelescco/Providers/presupuesto_provider.dart';
 import 'package:termopanelescco/Screens/agregar_pedido_screen.dart';
-import 'package:termopanelescco/Screens/shortcut_screen.dart';
-import 'Screens/register_screen.dart';
+
 import 'package:termopanelescco/Screens/home_screen.dart';
 import 'package:termopanelescco/Screens/pedidos_screen.dart';
 import 'package:termopanelescco/Screens/presupuestos_screen.dart';
 import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'Providers/termo_provider.dart';
 
 Future main() async {
@@ -24,18 +21,13 @@ Future main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    //datos de coneccion
-    options: const FirebaseOptions(
-      apiKey: "AIzaSyASVHU2Uyv1qmRlKmTbEfxBuiTP9ijMQ7I",
-      authDomain: "glowing-service-368612.firebaseapp.com",
-      projectId: "glowing-service-368612",
-      storageBucket: "glowing-service-368612.appspot.com",
-      messagingSenderId: "383193845980",
-      appId: "1:383193845980:web:11797bf5fa42e3234aa419",
-    ),
-  );
-
-  runApp(MyApp());
+      //datos de coneccion
+      options: const FirebaseOptions(
+          apiKey: "",
+          appId: "1:804231441180:android:e9acf63d5d5f0385aa68d9",
+          messagingSenderId: "",
+          projectId: "termopanelescurico-8d6aa"));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

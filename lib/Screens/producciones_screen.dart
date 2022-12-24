@@ -30,24 +30,15 @@ class _ProduccionesScreenState extends State<ProduccionesScreen> {
             identificador: element["identificador"],
             fecha: (element["fecha"] as Timestamp).toDate(),
             plancha: [
-              for (var a = 0; a < (element["plancha"] as List).length; a++) ...[
+              for (var a = 0; a < (element["plancha"] as List).length; a++)...[
                 Plancha(
                   columna: [
-                    for (var b = 0;
-                        b < (element["plancha"][a]["columna"] as List).length;
-                        b++) ...[
+                    for (var b = 0; b < (element["plancha"][a]["columna"] as List).length;  b++) ...[
                       Columna(fila: [
-                        for (var i = 0;
-                            i <
-                                (element["plancha"][a]["columna"][b]["fila"]
-                                        as List)
-                                    .length;
-                            i++) ...[
+                        for (var i = 0;i < (element["plancha"][a]["columna"][b]["fila"] as List) .length; i++) ...[
                           Fila(
-                            largoV: element["plancha"][a]["columna"][b]["fila"]
-                                [i]["largoV"],
-                            altoV: element["plancha"][a]["columna"][b]["fila"]
-                                [i]["altoV"],
+                    
+                             
                             codigo: element["plancha"][a]["columna"][b]["fila"]
                                 [i]["codigo"],
                             largo: element["plancha"][a]["columna"][b]["fila"]

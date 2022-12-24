@@ -42,11 +42,13 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
     }
 
     // ignore: await_only_futures
-    for (var item in await termos) {
+    for (var item in await itemsTermo) {
       vidrioAll.add(item.vidrio1.toString());
       vidrioAll.add(item.vidrio2.toString());
       separadorAll.add(item.separador.toString());
     }
+  termos = itemsTermo;
+
   }
 
   @override
