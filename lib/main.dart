@@ -26,10 +26,13 @@ Future main() async {
   await Firebase.initializeApp(
       //datos de coneccion
       options: const FirebaseOptions(
-          apiKey: "",
-          appId: "1:804231441180:android:e9acf63d5d5f0385aa68d9",
-          messagingSenderId: "",
-          projectId: "termopanelescurico-8d6aa"));
+    apiKey: "AIzaSyASVHU2Uyv1qmRlKmTbEfxBuiTP9ijMQ7I",
+    authDomain: "glowing-service-368612.firebaseapp.com",
+    projectId: "glowing-service-368612",
+    storageBucket: "glowing-service-368612.appspot.com",
+    messagingSenderId: "383193845980",
+    appId: "1:383193845980:web:11797bf5fa42e3234aa419",
+  ));
   runApp(const MyApp());
 }
 
