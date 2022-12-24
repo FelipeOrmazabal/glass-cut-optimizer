@@ -4,9 +4,7 @@ import 'package:termopanelescco/Models/termo.dart';
 
 import 'package:termopanelescco/Providers/termo_provider.dart';
 
-
 import 'package:termopanelescco/Widgets/WidgetsProductos/tabla_termo_widget.dart';
-
 
 import '../../Utils/texts_app.dart';
 import '../Widgets/appbar_widget.dart';
@@ -21,9 +19,9 @@ class TermopanelesScreen extends StatefulWidget {
 class _TermopanelesScreenState extends State<TermopanelesScreen> {
   @override
   Widget build(BuildContext context) {
-     final termosP = Provider.of<TermoP>(context);
- 
+    final termosP = Provider.of<TermoP>(context);
 
+    final _formKey = GlobalKey<FormState>();
 
     Widget addDialog() {
       return Dialog(
@@ -44,60 +42,71 @@ class _TermopanelesScreenState extends State<TermopanelesScreen> {
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                          height: 100,
-                          width: 140,
-                          child: TextFormField(
-                              controller: termosP.vidrio1Controller,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: TextApp.vidrio1))),
-                       SizedBox(
-                          height: 100,
-                          width: 140,
-                          child: TextFormField(
-                              controller:  termosP.separadorController,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: TextApp.separador))),
-                       SizedBox(
-                          height: 100,
-                          width: 140,
-                          child: TextFormField(
-                              controller:  termosP.vidrio2Controller,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: TextApp.vidrio2))),
-                      SizedBox(
-                          height: 100,
-                          width: 140,
-                          child: TextFormField(
-                              controller: termosP.valorController,
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: TextApp.precio))),
-                    ],
+                  child: Form(
+                    key: _formKey,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                            height: 100,
+                            width: 140,
+                            child: TextFormField(
+                                controller: termosP.vidrio1Controller,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: TextApp.vidrio1))),
+                        SizedBox(
+                            height: 100,
+                            width: 140,
+                            child: TextFormField(
+                                controller: termosP.separadorController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: TextApp.separador))),
+                        SizedBox(
+                            height: 100,
+                            width: 140,
+                            child: TextFormField(
+                                controller: termosP.vidrio2Controller,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: TextApp.vidrio2))),
+                        SizedBox(
+                            height: 100,
+                            width: 140,
+                            child: TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Por favor ingresar algún valor númerico';
+                                  }
+                                  return null;
+                                },
+                                controller: termosP.valorController,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: TextApp.precio))),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                     height: 40,
                     child: ElevatedButton(
                         onPressed: () {
-                          final termo = Termo(
-                              vidrio1: termosP.vidrio1Controller.text,
-                              separador: termosP.separadorController.text,
-                              vidrio2: termosP.vidrio2Controller.text,
-                              valor: int.parse(termosP.valorController.text));
+                          if (_formKey.currentState!.validate()) {
+                            final termo = Termo(
+                                vidrio1: termosP.vidrio1Controller.text,
+                                separador: termosP.separadorController.text,
+                                vidrio2: termosP.vidrio2Controller.text,
+                                valor: int.parse(termosP.valorController.text));
 
-                          termosP.addTermo(termo);
-                          termosP.valorController.clear();
-                          termosP.vidrio1Controller.clear();
-                          termosP.separadorController.clear();
-                          termosP.vidrio2Controller.clear();
-                          Navigator.pop(context);
+                            termosP.addTermo(termo);
+                            termosP.valorController.clear();
+                            termosP.vidrio1Controller.clear();
+                            termosP.separadorController.clear();
+                            termosP.vidrio2Controller.clear();
+                            Navigator.pop(context);
+                          }
                         },
                         child: const Text(TextApp.guardar)))
               ],
@@ -105,12 +114,12 @@ class _TermopanelesScreenState extends State<TermopanelesScreen> {
           ));
     }
 
-    return Scaffold( appBar: const PreferredSize(
+    return Scaffold(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(56),
         child: AppBarWidget(),
       ),
-      body:
-       ListView(children: [
+      body: ListView(children: [
         Stack(
           children: [
             Center(
@@ -135,7 +144,8 @@ class _TermopanelesScreenState extends State<TermopanelesScreen> {
                                 TextApp.agregartermopaneles,
                                 style: TextStyle(fontSize: 25),
                               ),
-                            )), Container(
+                            )),
+                        Container(
                           alignment: Alignment.bottomRight,
                           margin: const EdgeInsets.only(top: 39),
                           child: const Text(
@@ -144,14 +154,14 @@ class _TermopanelesScreenState extends State<TermopanelesScreen> {
                                 fontSize: 50, fontWeight: FontWeight.bold),
                           ),
                         ),
-                         const SizedBox(
+                        const SizedBox(
                           width: 200,
                         )
                       ],
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
-    
+
                       // import de Widgets/widgetsProductos/tabla_widget
                       child: const TablaTermo(),
                     )
