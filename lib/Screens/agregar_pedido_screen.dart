@@ -5,6 +5,7 @@ import 'package:termopanelescco/Models/pedido.dart';
 import 'package:termopanelescco/Models/termo.dart';
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
+import 'package:termopanelescco/Providers/presupuesto_provider.dart';
 import '../Utils/texts_app.dart';
 //prueba3
 
@@ -64,6 +65,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
   @override
   Widget build(BuildContext context) {
     final detallePedidoP = Provider.of<AgregarDetallePedidoP>(context);
+    final presupuestoP = Provider.of<PresupuestoP>(context);
     final pedidoP = Provider.of<PedidoP>(context);
 
     void valor(int index) {
@@ -109,40 +111,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
             },
           ),
           title: const Text(TextApp.tituloAppbar),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/pedidos');
-                },
-                child: const Text(
-                  TextApp.pedidios,
-                  style: TextStyle(color: Colors.white),
-                )),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/presupuestos');
-                },
-                child: const Text(
-                  TextApp.presupuestos,
-                  style: TextStyle(color: Colors.white),
-                )),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/producciones');
-                },
-                child: const Text(
-                  TextApp.produccion,
-                  style: TextStyle(color: Colors.white),
-                )),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/termopaneles');
-                },
-                child: const Text(
-                  TextApp.productos,
-                  style: TextStyle(color: Colors.white),
-                )),
-          ],
+        
         ),
         body: ListView(children: [
           Stack(
@@ -203,12 +172,12 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                               Text("codigo          ",
                                   style: TextStyle(fontSize: 17)),
                               Text("vidrio 1", style: TextStyle(fontSize: 17)),
-                              Text("separador", style: TextStyle(fontSize: 17)),
+                              Text("      separador      ", style: TextStyle(fontSize: 17)),
                               Text("vidrio 2", style: TextStyle(fontSize: 17)),
-                              Text("                          largo mm",
+                              Text("           largo mm",
                                   style: TextStyle(fontSize: 17)),
                               Text("alto mm", style: TextStyle(fontSize: 17)),
-                              Text("   cantidad",
+                              Text("cantidad",
                                   style: TextStyle(fontSize: 17)),
                               Text("M^2", style: TextStyle(fontSize: 17)),
                               Text("valor M^2", style: TextStyle(fontSize: 17)),
@@ -270,7 +239,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                                           ))),
                                   SizedBox(
                                       height: 50,
-                                      width: 158,
+                                      width: 170,
                                       child: DropdownButtonFormField(
                                           value:
                                               separador[index].first.toString(),
@@ -507,8 +476,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                                       }
                                     }
 
-                                    valor(detallePedidoP.count - 1);
-                                    vidrios1;
+                                  valor(detallePedidoP.count - 1);
                                   })),
                           Container(
                             margin: const EdgeInsets.only(right: 3),
@@ -524,79 +492,157 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              child: ElevatedButton(
-                                  onPressed: () {
-                                    
-
-                                    detallePedidoP.agregarDetalle();
-
-                                    final pedido = Pedido(
-                                        identificador: detallePedidoP
-                                            .controllerIdentificador.text,
-                                        fecha: DateTime.now(),
-                                        detallePedido: detallePedidoP.detalle,
-                                        total: double.parse(detallePedidoP
-                                            .controllerTotal.text),
-                                        usuario: detallePedidoP
-                                            .controllerIdentificador.text);
-
-                                    pedidoP.addPedido(pedido);
-                                    // presupuestoP.addPresupuesto(pedido);
-
-                                    detallePedidoP.controllerAlto = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerLargo = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerCantidad = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerCodigo = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerCodigos.clear();
-                                    detallePedidoP.controllerIdentificador
-                                        .clear();
-                                    detallePedidoP.controllerM2 = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerValorM2 = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.controllerTotal.clear();
-                                    detallePedidoP.controllerPrecio = [
-                                      TextEditingController()
-                                    ];
-                                    detallePedidoP.currentvalueS = [
-                                      "currentValueS"
-                                    ];
-                                    detallePedidoP.currentvalueV1 = [
-                                      "currentValueV1"
-                                    ];
-                                    detallePedidoP.currentvalueV2 = [
-                                      "currentValueV2"
-                                    ];
-                                    detallePedidoP.altura = 1;
-                                    detallePedidoP.alturaS = 8;
-
-                                    detallePedidoP.count = 0;
-                                    detallePedidoP.detalle.clear();
-
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil('/pedidos',
-                                            (Route<dynamic> route) => false);
-                                  },
-                                  child: const Text(
-                                    "Guardar Pedido / Generar Pesupuesto",
-                                    style: TextStyle(fontSize: 20),
-                                  ))),
-                        ],
+                      Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children:[ 
+                        Container(),
+                        Column(
+                         
+                          children: [
+                            Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      
+                      
+                                      detallePedidoP.agregarDetalle();
+                      
+                                      final pedido = Pedido(
+                                        icodigo: detallePedidoP.controllerCodigos.text,
+                                          identificador: detallePedidoP
+                                              .controllerIdentificador.text,
+                                          fecha: DateTime.now(),
+                                          detallePedido: detallePedidoP.detalle,
+                                          total: double.parse(detallePedidoP
+                                              .controllerTotal.text),
+                                          usuario: detallePedidoP
+                                              .controllerIdentificador.text);
+                      
+                                      pedidoP.addPedido(pedido);
+                                      // presupuestoP.addPresupuesto(pedido);
+                      
+                                      detallePedidoP.controllerAlto = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerLargo = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCantidad = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCodigo = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCodigos.clear();
+                                      detallePedidoP.controllerIdentificador
+                                          .clear();
+                                      detallePedidoP.controllerM2 = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerValorM2 = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerTotal.clear();
+                                      detallePedidoP.controllerPrecio = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.currentvalueS = [
+                                        "currentValueS"
+                                      ];
+                                      detallePedidoP.currentvalueV1 = [
+                                        "currentValueV1"
+                                      ];
+                                      detallePedidoP.currentvalueV2 = [
+                                        "currentValueV2"
+                                      ];
+                                      detallePedidoP.altura = 1;
+                                      detallePedidoP.alturaS = 8;
+                      
+                                      detallePedidoP.count = 0;
+                                      detallePedidoP.detalle.clear();
+                      
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil('/pedidos',
+                                              (Route<dynamic> route) => false);
+                                    },
+                                    child: const Text(
+                                      "                   Guardar Pedido                     ",
+                                      
+                                      style: TextStyle(fontSize: 20),
+                                    ))),
+                                     Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      
+                      
+                                      detallePedidoP.agregarDetalle();
+                      
+                                      final pedido = Pedido(
+                                        icodigo: detallePedidoP.controllerCodigos.text,
+                                          identificador: detallePedidoP
+                                              .controllerIdentificador.text,
+                                          fecha: DateTime.now(),
+                                          detallePedido: detallePedidoP.detalle,
+                                          total: double.parse(detallePedidoP
+                                              .controllerTotal.text),
+                                          usuario: detallePedidoP
+                                              .controllerIdentificador.text);
+                      
+                                      pedidoP.addPedido(pedido);
+                                      presupuestoP.addPresupuesto(pedido);
+                      
+                                      detallePedidoP.controllerAlto = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerLargo = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCantidad = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCodigo = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerCodigos.clear();
+                                      detallePedidoP.controllerIdentificador
+                                          .clear();
+                                      detallePedidoP.controllerM2 = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerValorM2 = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.controllerTotal.clear();
+                                      detallePedidoP.controllerPrecio = [
+                                        TextEditingController()
+                                      ];
+                                      detallePedidoP.currentvalueS = [
+                                        "currentValueS"
+                                      ];
+                                      detallePedidoP.currentvalueV1 = [
+                                        "currentValueV1"
+                                      ];
+                                      detallePedidoP.currentvalueV2 = [
+                                        "currentValueV2"
+                                      ];
+                                      detallePedidoP.altura = 1;
+                                      detallePedidoP.alturaS = 8;
+                      
+                                      detallePedidoP.count = 0;
+                                      detallePedidoP.detalle.clear();
+                      
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil('/pedidos',
+                                              (Route<dynamic> route) => false);
+                                    },
+                                    child: const Text(
+                                      "Guardar Pedido / Generar Pesupuesto",
+                                      style: TextStyle(fontSize: 20),
+                                    )))
+                          ],
+                        ),
+                        
+                        ]
                       )
                     ],
                   ),

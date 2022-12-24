@@ -170,10 +170,10 @@ class _DetallePresupuestoScreenState extends State<DetallePresupuestoScreen> {
                       margin: const EdgeInsets.only(top: 20 ,right: 150),
                       child: ElevatedButton(
                           onPressed: () {
-                       
+                            Navigator.of(context).pop();
                           },
                           child: const Text(
-                            "Enviar Presupuesto",
+                            "Atrás ",
                             style: TextStyle(fontSize: 20),
                           ))),
                 ],

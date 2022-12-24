@@ -91,20 +91,19 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
                                                   child: Center(
                                                     child: Container(
                                                       color: const Color.fromARGB(255, 235, 235, 235),
-                                                      child: Column(children: [
+                                                      child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                                         Text(fila.largo.toString()),
-                                                        
+                                                            
                                                             Row(
                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                             
+                                                            
                                                               children: [
-                                                                Container(
-                                                                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, ), child: Text(fila.alto.toString()))
-                                                                    ,Container( margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, ), child: Text(fila.codigo.toString(), style: const TextStyle(fontSize: 20 , fontWeight: FontWeight.bold), ))
+                                                                Container(child: Text(fila.alto.toString(),))
+                                                                    ,Container(  child: Text(fila.codigo.toString() , style: const TextStyle(fontSize: 20 , fontWeight: FontWeight.bold), ))
                                                                   ,  Container( )
                                                               ],
-                                                            )
-                                                    
+                                                            ),
+                                                        Container()
                                                       ],),
                                                     )
                                                   ),

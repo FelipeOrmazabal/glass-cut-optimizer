@@ -10,6 +10,7 @@ class PedidoP with ChangeNotifier {
         .doc();
     final pedidoP = Pedido(
         id: docPedido.id,
+        icodigo: pedido.icodigo,
         identificador: pedido.identificador,
         fecha: pedido.fecha,
         detallePedido: pedido.detallePedido,

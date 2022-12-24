@@ -27,6 +27,7 @@ class _PresupuestosScreenState extends State<PresupuestosScreen> {
           0,
           Pedido(
               identificador: element["identificador"],
+               icodigo: element["icodigo"],
               fecha: (element["fecha"] as Timestamp).toDate(),
               detallePedido: [
                 for (var i = 0;

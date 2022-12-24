@@ -62,8 +62,6 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
   List<List<String>> separador = [];
   List<List<String>> vidrios2 = [];
 
-
-
   @override
   Widget build(BuildContext context) {
     final dPP = Provider.of<DetallePedidoP>(context);
@@ -85,15 +83,49 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
     Pedido? pedido = widget.pedido;
     List<DetallePedido>? dpedido = pedido.detallePedido;
     dPP.count = dpedido!.length;
-    int peditar = dpedido.length;
+   
+   
 
- for (var item in dpedido) {
-                
-      dPP.addFila2(item.vidrio1.toString(), item.vidrio2.toString(), item.separador.toString(),
-       item.codigo.toString(), item.largo.toString(), item.alto.toString(), item.cantidad.toString(), 
-       item.m2.toString(), item.valorM2.toString(), item.precio.toString());
+
+    if (dPP.vista == false) {
+      int i = 0;
+        if (i==0){
+          dPP.controllerIdentificador.text = pedido.identificador.toString();
+            dPP.controllerTotal.text = pedido.identificador.toString();
+            dPP.controllerCodigos.text = pedido.icodigo.toString();
+        }
+      for (var item in dpedido) {
+        
+        vidrios1.add([]);
+        vidrios2.add([]);
+        separador.add([]);
+
+        dPP.addFila2(
+            item.vidrio1.toString(),
+            item.vidrio2.toString(),
+            item.separador.toString(),
+            item.codigo.toString(),
+            item.largo.toString(),
+            item.alto.toString(),
+            item.cantidad.toString(),
+            item.m2.toString(),
+            item.valorM2.toString(),
+            item.precio.toString());
+        vidrios1[i].insert(0, item.vidrio1.toString());
+        vidrios2[i].insert(0, item.vidrio2.toString());
+        separador[i].insert(0, item.separador.toString());
+
+        for (var item in separadorAll) {
+          separador[i-1].insert(1, item);
+        }
+        for (var item in vidrioAll) {
+          vidrios2[i-1].insert(1, item);
+          vidrios1[i-1].insert(1, item);
+        }
+        i++;
+      }
     }
-    
+
     print(dPP.count);
     if (dPP.vista == false) {
       return Scaffold(
@@ -220,8 +252,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                               child: const Icon(Icons.edit),
                               onPressed: () {
                                 setState(() {
-                         
-                                 print(dPP.controllerAlto.first);                                   dPP.vista = true;
+                                  dPP.vista = true;
                                 });
                               })),
                       Container(
@@ -254,13 +285,8 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
         ]),
       );
     } else {
-               for (var item in dpedido) {
-                
-      dPP.addFila2(item.vidrio1.toString(), item.vidrio2.toString(), item.separador.toString(),
-       item.codigo.toString(), item.largo.toString(), item.alto.toString(), item.cantidad.toString(), 
-       item.m2.toString(), item.valorM2.toString(), item.precio.toString());
-    }
-    
+      print(dPP.count);
+
       return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -291,40 +317,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
               },
             ),
             title: const Text(TextApp.tituloAppbar),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/pedidos');
-                  },
-                  child: const Text(
-                    TextApp.pedidios,
-                    style: TextStyle(color: Colors.white),
-                  )),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/presupuestos');
-                  },
-                  child: const Text(
-                    TextApp.presupuestos,
-                    style: TextStyle(color: Colors.white),
-                  )),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/producciones');
-                  },
-                  child: const Text(
-                    TextApp.produccion,
-                    style: TextStyle(color: Colors.white),
-                  )),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/termopaneles');
-                  },
-                  child: const Text(
-                    TextApp.productos,
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ],
+            
           ),
           body: ListView(children: [
             Stack(
@@ -339,7 +332,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                         Container(
                             margin: const EdgeInsets.only(top: 30, bottom: 20),
                             child: const Text(
-                              "Agregar Pedido",
+                              "Editar Pedido",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30),
                             )),
@@ -381,23 +374,19 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: const [
-                                Text("codigo          ",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("vidrio 1",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("separador",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("vidrio 2",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("                          largo mm",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("alto mm", style: TextStyle(fontSize: 17)),
-                                Text("   cantidad",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("M^2", style: TextStyle(fontSize: 17)),
-                                Text("valor M^2",
-                                    style: TextStyle(fontSize: 17)),
-                                Text("precio", style: TextStyle(fontSize: 17)),
+                               Text("codigo          ",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("vidrio 1", style: TextStyle(fontSize: 17)),
+                              Text("      separador      ", style: TextStyle(fontSize: 17)),
+                              Text("vidrio 2", style: TextStyle(fontSize: 17)),
+                              Text("           largo mm",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("alto mm", style: TextStyle(fontSize: 17)),
+                              Text("cantidad",
+                                  style: TextStyle(fontSize: 17)),
+                              Text("M^2", style: TextStyle(fontSize: 17)),
+                              Text("valor M^2", style: TextStyle(fontSize: 17)),
+                              Text("precio", style: TextStyle(fontSize: 17)),
                               ],
                             ),
                           ),
@@ -455,7 +444,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                                             ))),
                                     SizedBox(
                                         height: 50,
-                                        width: 158,
+                                        width: 170,
                                         child: DropdownButtonFormField(
                                             value: separador[index]
                                                 .first
@@ -643,7 +632,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                                       //         .insert(1, item);
                                       //   }
                                       //   }
-                                       
+
                                       // } else {
                                       //   vidrios1[dPP.count - 1].insert(0,
                                       //       dPP.currentvalueV1[dPP.count - 2]);
@@ -667,7 +656,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                                       // }
 
                                       // valor(dPP.count - 1);
-                                      // vidrios1;
+                                     
                                     })),
                             Container(
                               margin: const EdgeInsets.only(right: 3),
@@ -693,6 +682,7 @@ class _DetallePedidoScreenState extends State<DetallePedidoScreen> {
                                       dPP.agregarDetalle();
 
                                       final pedido = Pedido(
+                                          icodigo: dPP.controllerCodigos.text,
                                           identificador:
                                               dPP.controllerIdentificador.text,
                                           fecha: DateTime.now(),

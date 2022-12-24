@@ -33,6 +33,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
           0,
           Pedido(
               identificador: element["identificador"],
+              icodigo: element["icodigo"],
               fecha: (element["fecha"] as Timestamp).toDate(),
               detallePedido: [
                 for (var i = 0;
@@ -126,7 +127,6 @@ class _PedidosScreenState extends State<PedidosScreen> {
                           listPLancha() {
                             double largo = 0;
                             double alto = 0;
-                            double alto2 = 2;
                             int lfila = 0;
                             int lcol = 0;
 

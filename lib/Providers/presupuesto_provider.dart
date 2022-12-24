@@ -15,6 +15,7 @@ class PresupuestoP with ChangeNotifier {
         id: docPedido.id,
         identificador: pedido.identificador,
         fecha: pedido.fecha,
+        icodigo: pedido.icodigo,
         detallePedido: pedido.detallePedido,
         total: pedido.total,
         usuario: pedido.usuario);
