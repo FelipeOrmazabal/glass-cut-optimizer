@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../Models/detalle_pedido.dart';
 
-class AgregarDetallePedidoP with ChangeNotifier {
+class DetallePedidoP with ChangeNotifier {
   final controllerCodigos = TextEditingController();
   final controllerTotal = TextEditingController();
   final controllerIdentificador = TextEditingController();
@@ -20,7 +20,7 @@ class AgregarDetallePedidoP with ChangeNotifier {
   List<DetallePedido> detalle = [];
 
   int count = 0;
-
+  bool vista  = false;
   double altura = 1;
   double alturaS = 8;
   void addFila(
@@ -44,7 +44,34 @@ class AgregarDetallePedidoP with ChangeNotifier {
 
     notifyListeners();
   }
+void addFila2(
+    String currentValueV1,
+    String currentValueV2,
+    String currentValueS,
+    String codigo,
+    String largo,
+    String alto,
+    String cantidad,
+    String m2,
+    String valorM2,
+    String precio,
+  ) {
+    count++;
+    altura = altura + 1;
+    alturaS = alturaS + 1;
+    controllerCodigo.add(TextEditingController(text: codigo));
+    controllerLargo.add(TextEditingController(text: largo));
+    controllerAlto.add(TextEditingController(text: alto));
+    controllerCantidad.add(TextEditingController(text: cantidad));
+    controllerM2.add(TextEditingController(text: m2));
+    controllerValorM2.add(TextEditingController(text: valorM2));
+    controllerPrecio.add(TextEditingController(text: precio));
+    currentvalueS.add(currentValueS);
+    currentvalueV1.add(currentValueV1);
+    currentvalueV2.add(currentValueV2);
 
+    notifyListeners();
+  }
   void deleteFila() {
     if (count > 0) {
       count--;
@@ -72,7 +99,6 @@ class AgregarDetallePedidoP with ChangeNotifier {
 
   void agregarDetalle() {
     for (var i = 0; i < count; i++) {
-      
       detalle.add(DetallePedido(
           codigo: controllerCodigo[i].text,
           vidrio1: currentvalueV1[i],

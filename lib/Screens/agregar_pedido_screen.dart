@@ -531,6 +531,8 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                               margin: const EdgeInsets.only(top: 20),
                               child: ElevatedButton(
                                   onPressed: () {
+                                    
+
                                     detallePedidoP.agregarDetalle();
 
                                     final pedido = Pedido(

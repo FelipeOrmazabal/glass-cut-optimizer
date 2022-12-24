@@ -23,8 +23,10 @@ class _PedidosScreenState extends State<PedidosScreen> {
   Future<List<Pedido>> readPedidos() async {
     List<Pedido> itemsPedido = [];
 
-    QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection("pedidos").get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection("pedidos")
+        .orderBy("fecha")
+        .get();
 
     for (var element in snapshot.docs) {
       itemsPedido.insert(
@@ -113,21 +115,20 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                     codigo: item.codigo,
                                     largo: item.largo,
                                     alto: item.alto,
-                              
                                     cantidad: item.cantidad,
                                     m2: item.m2)
                               ]
                             ]
                           ];
-                       
 
                           filaO.sort((a, b) => b.alto!.compareTo(a.alto!));
 
                           listPLancha() {
-                          double largo = 0;
-                          double alto = 0;
-                          int lfila = 0;
-                          int lcol = 0; 
+                            double largo = 0;
+                            double alto = 0;
+                            double alto2 = 2;
+                            int lfila = 0;
+                            int lcol = 0;
 
                             final List<Plancha> pla = [];
                             final List<List<Columna>> colu = [[]];
@@ -135,44 +136,36 @@ class _PedidosScreenState extends State<PedidosScreen> {
                             int last = filaO.length - 1;
 
                             for (var i = 0; i < filaO.length; i++) {
-                              largo += filaO[i].largo as num;
-
-                              if (largo < int.parse(controllerLargo.text) &&
-                                  filaO[i].alto as num <
-                                      int.parse(controllerAlto.text) - alto) {
-                                fil[lfila].insert(
-                                    0,
-                                    Fila(
-                                    
-                                      codigo: filaO[i].codigo,
-                                      largo: filaO[i].largo,
-                                      alto: filaO[i].alto,
-                                      cantidad: filaO[i].cantidad,
-                                      m2: filaO[i].m2,
-                                    ));
-                              } else if (filaO[i].largo as num >
-                                  int.parse(controllerLargo.text) - largo) {
+                              if (i == 0) {
                                 alto += filaO[i].alto as num;
-                                largo = 0;
+                              }
 
-                                colu[lcol].insert(0, Columna(fila: fil[lfila]));
-                                lfila = lfila + 1;
-                                fil.add([]);
+                              largo += filaO[i].largo as num;
+                                if (largo >
+                                    int.parse(controllerLargo.text)) {
+                                  alto += filaO[i].alto as num;
+                                }
 
+                              print("la");
+                              if (largo < int.parse(controllerLargo.text) &&
+                                  alto < int.parse(controllerAlto.text)) {
+                                print("a");
+                              
                                 fil[lfila].insert(
                                     0,
                                     Fila(
-                                    
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
                                       cantidad: filaO[i].cantidad,
                                       m2: filaO[i].m2,
                                     ));
-                              } else if (filaO[i].alto as num >
-                                  int.parse(controllerAlto.text) - alto) {
-                                alto = 0;
-                                largo = 0;
+                              }  else if (alto >
+                                  int.parse(controllerAlto.text)) {
+                                print("c");
+                                alto = filaO[i].alto as double;
+                                largo = filaO[i].largo as double;
+                                colu[lcol].insert(0, Columna(fila: fil[lfila]));
                                 pla.insert(0, Plancha(columna: colu[lcol]));
                                 lcol = lcol + 1;
                                 colu.add([]);
@@ -182,7 +175,25 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
-                                   
+                                      codigo: filaO[i].codigo,
+                                      largo: filaO[i].largo,
+                                      alto: filaO[i].alto,
+                                      cantidad: filaO[i].cantidad,
+                                      m2: filaO[i].m2,
+                                    ));
+                              }else if (largo >
+                                  int.parse(controllerLargo.text)) {
+                                print("b");
+                                
+                                largo = filaO[i].largo as double;
+
+                                colu[lcol].insert(0, Columna(fila: fil[lfila]));
+                                lfila = lfila + 1;
+                                fil.add([]);
+
+                                fil[lfila].insert(
+                                    0,
+                                    Fila(
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
@@ -191,6 +202,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                     ));
                               }
                               if (i == last) {
+                                print("d");
                                 colu[lcol].insert(0, Columna(fila: fil[lfila]));
 
                                 pla.insert(
@@ -199,23 +211,25 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                       columna: colu[lcol],
                                     ));
                               }
+                              print("caca");
                             }
 
                             return pla;
                           }
 
-                          final pedidoProduccion = Produccion(
-                              identificador: pedido.identificador,
-                              fecha: pedido.fecha,
-                              plancha: listPLancha(),
-                              usuario: pedido.usuario,
-                              altoPLancha: int.parse(controllerAlto.text),
-                              largoPlancha: int.parse(controllerLargo.text));
-                          controllerAlto.clear;
-                          controllerLargo.clear;
-                          ProduccionP().addProduccion(pedidoProduccion);
+                          
+                           final pedidoProduccion = Produccion(
+                               identificador: pedido.identificador,
+                               fecha: pedido.fecha,
+                               plancha: listPLancha(),
+                               usuario: pedido.usuario,
+                               altoPLancha: int.parse(controllerAlto.text),
+                               largoPlancha: int.parse(controllerLargo.text));
+                           controllerAlto.clear;
+                           controllerLargo.clear;
+                           ProduccionP().addProduccion(pedidoProduccion);
 
-                          Navigator.pushNamed(context, "/producciones");
+                           Navigator.pushNamed(context, "/producciones");
                         },
                         child: const Text("Enviar a Produccion")))
               ],
@@ -280,7 +294,6 @@ class _PedidosScreenState extends State<PedidosScreen> {
                               builder: (context, AsyncSnapshot<List> snapshot) {
                                 List pedidos = snapshot.data ?? [];
 
-                                
                                 return Column(children: [
                                   for (Pedido pedido in pedidos)
                                     Card(

@@ -98,7 +98,8 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                              
                                                               children: [
-                                                                Container( margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, ), child: Text(fila.alto.toString()))
+                                                                Container(
+                                                                   margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, ), child: Text(fila.alto.toString()))
                                                                     ,Container( margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, ), child: Text(fila.codigo.toString(), style: const TextStyle(fontSize: 20 , fontWeight: FontWeight.bold), ))
                                                                   ,  Container( )
                                                               ],

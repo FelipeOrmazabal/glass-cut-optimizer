@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:termopanelescco/Providers/agregar_detalle_pedido_provider.dart';
+import 'package:termopanelescco/Providers/detalle_pedido_provider.dart';
 import 'package:termopanelescco/Providers/detalle_produccion_provider.dart';
 import 'package:termopanelescco/Providers/pedido_provider.dart';
 import 'package:termopanelescco/Providers/presupuesto_provider.dart';
@@ -41,6 +42,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PedidoP()),
         ChangeNotifierProvider(create: (_) => PresupuestoP()),
         ChangeNotifierProvider(create: (_) => DetalleProduccionP()),
+        ChangeNotifierProvider(create: (_) => DetallePedidoP()),
+        ChangeNotifierProvider(create: (_) => AgregarDetallePedidoP()),
       ],
       child: MaterialApp(
         title: 'Termopanelescco',
