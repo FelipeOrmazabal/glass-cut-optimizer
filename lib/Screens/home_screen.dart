@@ -8,15 +8,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final usuario = TextEditingController();
     final password = TextEditingController();
-    Widget popUp() {
-      return const Dialog(
-        child: const SizedBox(
-            height: 150,
-            width: 300,
-            child: Center(
-              child: const Text("Usuaio o Contraseña Incorrecta"),
-            )),
-      );
+    Future signIn() async {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: usuario.text.trim(), password: password.text.trim());
+        Navigator.pushNamed(context, "/shortcut");
+      } on FirebaseAuthException catch (e) {
+        print(e);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: Text(e.message.toString()),
+            );
+          },
+        );
+      }
     }
 
     //@override

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ import 'package:termopanelescco/Screens/producciones_screen.dart';
 import 'package:termopanelescco/Screens/termopaneles_screen.dart';
 
 import 'Providers/termo_provider.dart';
+import 'Screens/register_screen.dart';
+import 'Screens/shortcut_screen.dart';
 
 Future main() async {
 //Coneccion a Firestore
