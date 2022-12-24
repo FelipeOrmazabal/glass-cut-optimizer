@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: usuario.text.trim(), password: password.text.trim());
-        Navigator.pushNamed(context, "/pedidos");
+        Navigator.pushNamed(context, "/shortcut");
       } on FirebaseAuthException catch (e) {
         print(e);
         showDialog(
