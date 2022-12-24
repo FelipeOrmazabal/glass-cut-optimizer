@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
           image: const DecorationImage(
-            image: AssetImage("assets/Imagen1.png"),
+            image: AssetImage("assets/images/Imagen1.png"),
             scale: 1.5,
             fit: BoxFit.none,
             colorFilter: ColorFilter.mode(Colors.transparent, BlendMode.color),
@@ -58,12 +58,12 @@ class HomeScreen extends StatelessWidget {
             children: [
               const ListTile(
                 title: Text(
-                  "Bienvenido a Termopaneles Curicó\n\n\n\n",
+                  "Bienvenido a TermoPaneles Curicó\n\n\n\n",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.w100,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
               ),
               Row(
