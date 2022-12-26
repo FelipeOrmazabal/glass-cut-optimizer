@@ -24,7 +24,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     return AppBar(
       title: const Text(TextApp.tituloAppbar),
       actions: [
-        if (user.email == "alexcaxtro@gmail.com") ...[
+        if (user.email == "admin@gmail.com") ...[
           TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
@@ -33,9 +33,17 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 "Crear Usuarios",
                 style: TextStyle(color: Colors.white),
               )),
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/termopaneles');
+              },
+              child: const Text(
+                TextApp.productos,
+                style: TextStyle(color: Colors.white),
+              )),
         ],
-        if (user.email == "alexcaxtro@gmail.com" ||
-            user.email == "felipe@gmail.com") ...[
+        if (user.email == "asistente@gmail.com" ||
+            user.email == "asistente@gmail.com") ...[
           TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/pedidos');
@@ -50,14 +58,6 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               },
               child: const Text(
                 TextApp.presupuestos,
-                style: TextStyle(color: Colors.white),
-              )),
-          TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/termopaneles');
-              },
-              child: const Text(
-                TextApp.productos,
                 style: TextStyle(color: Colors.white),
               )),
         ],
