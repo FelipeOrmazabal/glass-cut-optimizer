@@ -29,8 +29,25 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
+              
               child: const Text(
                 "Crear Usuarios",
+                style: TextStyle(color: Colors.white),
+              )),
+              TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/pedidos');
+              },
+              child: const Text(
+                TextApp.pedidios,
+                style: TextStyle(color: Colors.white),
+              )),
+              TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/presupuestos');
+              },
+              child: const Text(
+                TextApp.presupuestos,
                 style: TextStyle(color: Colors.white),
               )),
           TextButton(

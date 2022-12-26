@@ -45,7 +45,7 @@ class ShortcutPage extends StatelessWidget {
                         color: Colors.white54,
                         margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.15,
-                          left: MediaQuery.of(context).size.width * 0.06,
+                          left: MediaQuery.of(context).size.width * 0.05,
                         ),
                         child: Text(
                           "Pedidos",
@@ -72,7 +72,7 @@ class ShortcutPage extends StatelessWidget {
                         color: Colors.white54,
                         margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.15,
-                          left: MediaQuery.of(context).size.width * 0.06,
+                          left: MediaQuery.of(context).size.width * 0.04,
                         ),
                         child: Text(
                           "Producción",
@@ -100,7 +100,7 @@ class ShortcutPage extends StatelessWidget {
                         color: Colors.white54,
                         margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.15,
-                          left: MediaQuery.of(context).size.width * 0.06,
+                          left: MediaQuery.of(context).size.width * 0.04,
                         ),
                         child: Text(
                           "Presupuesto",
