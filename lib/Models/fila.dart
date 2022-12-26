@@ -6,13 +6,14 @@ class Fila with ChangeNotifier {
   final String? codigo;
   final int? largo;
   final int? alto;
-
+  final bool estado;
   final int? cantidad;
   final double? m2;
 
   Fila({
     this.id,
     required this.codigo,
+     required this.estado,
     required this.largo,
     required this.alto,
     required this.cantidad,
@@ -22,6 +23,7 @@ class Fila with ChangeNotifier {
   factory Fila.fromJson(Map<dynamic, dynamic> json) => Fila(
         alto: json['alto'],
         cantidad: json['cantidad'],
+        estado: json['estado'],
         codigo: json['codigo'],
         largo: json['largo'],
         m2: json['m2'],
@@ -29,6 +31,7 @@ class Fila with ChangeNotifier {
 
   Map<String, dynamic> toJson() => {
         "codigo": codigo,
+         "estado": estado,
         "largo": largo,
         "alto": alto,
         "cantidad": cantidad,

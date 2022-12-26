@@ -69,6 +69,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
     final pedidoP = Provider.of<PedidoP>(context);
 
     void valor(int index) {
+       detallePedidoP.controllerValorM2[index].text = 27000.toString();
       for (var item in termos) {
         if (detallePedidoP.currentvalueV1[index] == item.vidrio1 &&
                 detallePedidoP.currentvalueS[index] == item.separador &&
@@ -578,6 +579,7 @@ class _AgregarPedidoScreenState extends State<AgregarPedidoScreen> {
                                       detallePedidoP.agregarDetalle();
                       
                                       final pedido = Pedido(
+                                      
                                         icodigo: detallePedidoP.controllerCodigos.text,
                                           identificador: detallePedidoP
                                               .controllerIdentificador.text,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:termopanelescco/Models/produccion.dart';
 
 import '../Widgets/appbar_widget.dart';
@@ -17,9 +16,21 @@ class DetalleProduccionScreen extends StatefulWidget {
 }
 
 class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
+
+
+
+  
   @override
   Widget build(BuildContext context) {
     Produccion? produccion = widget.produccion;
+
+    color(bool color) {
+      if (color == true) {
+        return Color.fromARGB(255, 235, 235, 235);
+      } else {
+        return Color.fromARGB(255, 235, 235, 235);
+      }
+    }
 
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
@@ -60,107 +71,126 @@ class _DetalleProduccionScreenState extends State<DetalleProduccionScreen> {
           ),
         ]),
         Expanded(
-            child: ListView(scrollDirection: Axis.horizontal, children: 
-       
-             produccion.plancha?.reversed
-                  .map(
-                    (plancha) => Stack(
-                      children:[ Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 1)),
-                        margin: const EdgeInsets.only(
-                            left: 60, right: 60, bottom: 60, top: 30),
-                        child: SizedBox(
-                          height: produccion.altoPLancha / 3,
-                          width: produccion.largoPlancha / 3 + 8,
-                          child: Column(
-                              children: plancha.columna.reversed
-                                  .map(
-                                    (columna) => Row(
-                                      children: columna.fila.reversed
-                                          .map(
-                                            (fila) => Stack(children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Colors.black,
-                                                        width: 1)),
-                                                child:  SizedBox(
-                                                  height: fila.alto! / 3,
-                                                  width: fila.largo! / 3,
-                                                  child: Center(
-                                                    child: Container(
-                                                      color: const Color.fromARGB(255, 235, 235, 235),
-                                                      child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                                        Text(fila.largo.toString()),
-                                                            
+            child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: produccion.plancha?.reversed
+                    .map((plancha) => Stack(children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 1)),
+                            margin: const EdgeInsets.only(
+                                left: 60, right: 60, bottom: 60, top: 30),
+                            child: SizedBox(
+                              height: produccion.altoPLancha / 3 + 8,
+                              width: produccion.largoPlancha / 3 + 8,
+                              child: Column(
+                                  children: plancha.columna.reversed
+                                      .map(
+                                        (columna) => Row(
+                                          children: columna.fila.reversed
+                                              .map(
+                                                (fila) => Stack(children: [
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.black,
+                                                            width: 1)),
+                                                    child: SizedBox(
+                                                      height: fila.alto! / 3,
+                                                      width: fila.largo! / 3,
+                                                      child: Center(
+                                                          child: Container(
+                                                        color: Color.fromARGB(
+                                                            255, 235, 235, 235),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(fila.largo
+                                                                .toString()),
                                                             Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
                                                               children: [
-                                                                Container(child: Text(fila.alto.toString(),))
-                                                                    ,Container(  child: Text(fila.codigo.toString() , style: const TextStyle(fontSize: 20 , fontWeight: FontWeight.bold), ))
-                                                                  ,  Container( )
+                                                                Container(
+                                                                    child: Text(
+                                                                  fila.alto
+                                                                      .toString(),
+                                                                )),
+                                                                Container(
+                                                                    child: Text(
+                                                                  fila.codigo
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                Container()
                                                               ],
                                                             ),
-                                                        Container()
-                                                      ],),
-                                                    )
+                                                            Container()
+                                                          ],
+                                                        ),
+                                                      )),
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
-                                            ]),
-                                          )
-                                          .toList(),
-                                    ),
-                                  )
-                                  .toList()
-                    
-                              //
-                              //row
-                              //
-                    
-                              //
-                    
-                              //Row
-                              //
-                    
-                              ),
-                        ),
-                      ),]
-                    )
-                  )
-                  .toList() as List<Widget>
+                                                ]),
+                                              )
+                                              .toList(),
+                                        ),
+                                      )
+                                      .toList()
 
-              // [
+                                  //
+                                  //row
+                                  //
 
-              //   //
-              //   //Plancha
-              //   //
+                                  //
 
-              //    TextButton(
-              //             onPressed: () {
+                                  //Row
+                                  //
 
-              //                 for (var item in produccion.plancha as List<Plancha>) {
+                                  ),
+                            ),
+                          ),
+                        ]))
+                    .toList() as List<Widget>
 
-              //                 for (var item2 in item.columna as List<Columna>) {
+                // [
 
-              //                   print(item2.fila.length);
+                //   //
+                //   //Plancha
+                //   //
 
-              //                 }
-              //                 }
+                //    TextButton(
+                //             onPressed: () {
 
-              //             },
-              //             child: Text("lala"),
-              //           ),
-              // ]
-          
-          //Plancha
-          //
+                //                 for (var item in produccion.plancha as List<Plancha>) {
 
-          //
-          //
-       ))
+                //                 for (var item2 in item.columna as List<Columna>) {
+
+                //                   print(item2.fila.length);
+
+                //                 }
+                //                 }
+
+                //             },
+                //             child: Text("lala"),
+                //           ),
+                // ]
+
+                //Plancha
+                //
+
+                //
+                //
+                ))
       ]),
     );
   }

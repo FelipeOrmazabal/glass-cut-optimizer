@@ -6,6 +6,7 @@ class AgregarDetallePedidoP with ChangeNotifier {
   final controllerCodigos = TextEditingController();
   final controllerTotal = TextEditingController();
   final controllerIdentificador = TextEditingController();
+  List<String> id = [];
   List<TextEditingController> controllerCodigo = [];
   List<TextEditingController> controllerLargo = [];
   List<TextEditingController> controllerAlto = [];
@@ -28,7 +29,6 @@ class AgregarDetallePedidoP with ChangeNotifier {
     String currentValueV2,
     String currentValueS,
   ) {
-    count++;
     altura = altura + 1;
     alturaS = alturaS + 1;
     controllerCodigo.add(TextEditingController());
@@ -41,7 +41,8 @@ class AgregarDetallePedidoP with ChangeNotifier {
     currentvalueS.add(currentValueS);
     currentvalueV1.add(currentValueV1);
     currentvalueV2.add(currentValueV2);
-
+    id.add(count.toString());
+    count++;
     notifyListeners();
   }
 
@@ -60,6 +61,7 @@ class AgregarDetallePedidoP with ChangeNotifier {
       currentvalueS.removeLast();
       currentvalueV1.removeLast();
       currentvalueV2.removeLast();
+      id.removeLast();
       notifyListeners();
     }
   }
@@ -72,7 +74,6 @@ class AgregarDetallePedidoP with ChangeNotifier {
 
   void agregarDetalle() {
     for (var i = 0; i < count; i++) {
-      
       detalle.add(DetallePedido(
           codigo: controllerCodigo[i].text,
           vidrio1: currentvalueV1[i],

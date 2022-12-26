@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../Models/detalle_pedido.dart';
@@ -56,7 +57,7 @@ void addFila2(
     String valorM2,
     String precio,
   ) {
-    count++;
+   
     altura = altura + 1;
     alturaS = alturaS + 1;
     controllerCodigo.add(TextEditingController(text: codigo));
@@ -69,7 +70,7 @@ void addFila2(
     currentvalueS.add(currentValueS);
     currentvalueV1.add(currentValueV1);
     currentvalueV2.add(currentValueV2);
-
+ count++;
     notifyListeners();
   }
   void deleteFila() {
@@ -141,5 +142,15 @@ void addFila2(
         precio(index);
       }
     }
+  }
+  Future delete(String id) async {
+    final docPedido = FirebaseFirestore.instance
+        .collection("pedidos")
+       
+        .doc(id);
+
+    docPedido.delete();
+
+    notifyListeners();
   }
 }

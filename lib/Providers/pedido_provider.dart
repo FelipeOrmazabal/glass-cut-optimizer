@@ -24,6 +24,16 @@ class PedidoP with ChangeNotifier {
   }
 
 
+ Future edit(Pedido pedido) async {
+    final docTermo = FirebaseFirestore.instance
+        .collection("termopaneles")
+        
+        .doc(pedido.id);
 
+    docTermo.update({'valor':pedido.fecha,});
+    notifyListeners();
+  }
+
+   
   
 }

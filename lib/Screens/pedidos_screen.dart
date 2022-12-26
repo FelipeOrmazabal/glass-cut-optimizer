@@ -32,6 +32,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
       itemsPedido.insert(
           0,
           Pedido(
+              id: element["id"],
               identificador: element["identificador"],
               icodigo: element["icodigo"],
               fecha: (element["fecha"] as Timestamp).toDate(),
@@ -113,6 +114,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                   i < item.cantidad!.toInt() * 2;
                                   i++) ...[
                                 Fila(
+                                    estado: false,
                                     codigo: item.codigo,
                                     largo: item.largo,
                                     alto: item.alto,
@@ -141,28 +143,24 @@ class _PedidosScreenState extends State<PedidosScreen> {
                               }
 
                               largo += filaO[i].largo as num;
-                                if (largo >
-                                    int.parse(controllerLargo.text)) {
-                                  alto += filaO[i].alto as num;
-                                }
+                              if (largo > int.parse(controllerLargo.text)) {
+                                alto += filaO[i].alto as num;
+                              }
 
-                              print("la");
-                              if (largo < int.parse(controllerLargo.text) &&
-                                  alto < int.parse(controllerAlto.text)) {
-                                print("a");
-                              
+                              if (largo <= int.parse(controllerLargo.text) &&
+                                  alto <= int.parse(controllerAlto.text)) {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
+                                      estado: false,
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
                                       cantidad: filaO[i].cantidad,
                                       m2: filaO[i].m2,
                                     ));
-                              }  else if (alto >
+                              } else if (alto >
                                   int.parse(controllerAlto.text)) {
-                                print("c");
                                 alto = filaO[i].alto as double;
                                 largo = filaO[i].largo as double;
                                 colu[lcol].insert(0, Columna(fila: fil[lfila]));
@@ -175,16 +173,15 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
+                                      estado: false,
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
                                       cantidad: filaO[i].cantidad,
                                       m2: filaO[i].m2,
                                     ));
-                              }else if (largo >
+                              } else if (largo >
                                   int.parse(controllerLargo.text)) {
-                                print("b");
-                                
                                 largo = filaO[i].largo as double;
 
                                 colu[lcol].insert(0, Columna(fila: fil[lfila]));
@@ -194,6 +191,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                 fil[lfila].insert(
                                     0,
                                     Fila(
+                                      estado: false,
                                       codigo: filaO[i].codigo,
                                       largo: filaO[i].largo,
                                       alto: filaO[i].alto,
@@ -202,7 +200,6 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                     ));
                               }
                               if (i == last) {
-                                print("d");
                                 colu[lcol].insert(0, Columna(fila: fil[lfila]));
 
                                 pla.insert(
@@ -211,25 +208,26 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                       columna: colu[lcol],
                                     ));
                               }
-                              print("caca");
                             }
 
                             return pla;
                           }
 
-                          
-                           final pedidoProduccion = Produccion(
-                               identificador: pedido.identificador,
-                               fecha: pedido.fecha,
-                               plancha: listPLancha(),
-                               usuario: pedido.usuario,
-                               altoPLancha: int.parse(controllerAlto.text),
-                               largoPlancha: int.parse(controllerLargo.text));
-                           controllerAlto.clear;
-                           controllerLargo.clear;
-                           ProduccionP().addProduccion(pedidoProduccion);
+                         
 
-                           Navigator.pushNamed(context, "/producciones");
+                          final pedidoProduccion = Produccion(
+                              identificador: pedido.identificador,
+                              fecha: pedido.fecha,
+                              plancha: listPLancha(),
+                              usuario: pedido.usuario,
+                              altoPLancha: int.parse(controllerAlto.text),
+                              largoPlancha: int.parse(controllerLargo.text));
+
+                          ProduccionP().addProduccion(pedidoProduccion);
+
+                          controllerAlto.text = "";
+                          controllerLargo.text = "";
+                          Navigator.pushNamed(context, "/producciones");
                         },
                         child: const Text("Enviar a Produccion")))
               ],

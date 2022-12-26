@@ -1,16 +1,13 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../Models/termo.dart';
 
 class TermoP with ChangeNotifier {
-  
-      final separadorController= TextEditingController();
-       final vidrio1Controller = TextEditingController();
-        final vidrio2Controller = TextEditingController();
-         final valorController = TextEditingController();
+  final separadorController = TextEditingController();
+  final vidrio1Controller = TextEditingController();
+  final vidrio2Controller = TextEditingController();
+  final valorController = TextEditingController();
 
   Future addTermo(Termo termo) async {
     final docTermo = FirebaseFirestore.instance
@@ -28,6 +25,7 @@ class TermoP with ChangeNotifier {
   Stream<List<Termo>> read() {
     return FirebaseFirestore.instance
         .collection("termopaneles")
+        .orderBy("valor", descending: true)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
@@ -37,10 +35,8 @@ class TermoP with ChangeNotifier {
   }
 
   Future delete(String id) async {
-    final docTermo = FirebaseFirestore.instance
-        .collection("termopaneles")
-       
-        .doc(id);
+    final docTermo =
+        FirebaseFirestore.instance.collection("termopaneles")   .doc(id);
 
     docTermo.delete();
 
@@ -48,18 +44,12 @@ class TermoP with ChangeNotifier {
   }
 
   Future edit(Termo termo) async {
-    final docTermo = FirebaseFirestore.instance
-        .collection("termopaneles")
-        
-        .doc(termo.id);
+    final docTermo =
+        FirebaseFirestore.instance.collection("termopaneles").doc(termo.id);
 
-    docTermo.update({'valor':termo.valor});
+    docTermo.update({
+      'valor': termo.valor,
+    });
     notifyListeners();
   }
-
-
-
 }
-
-
-

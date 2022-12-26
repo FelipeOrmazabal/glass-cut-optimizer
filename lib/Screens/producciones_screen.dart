@@ -18,37 +18,38 @@ class ProduccionesScreen extends StatefulWidget {
 
 class _ProduccionesScreenState extends State<ProduccionesScreen> {
   Future<List<Produccion>> readProduccion() async {
+
+  
+
     List<Produccion> itemsProduccion = [];
 
-    QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection("producciones").get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection("producciones")
+        .orderBy("fecha")
+        .get();
+
 
     for (var element in snapshot.docs) {
       itemsProduccion.insert(
           0,
           Produccion(
+            id: element['id'],
             identificador: element["identificador"],
             fecha: (element["fecha"] as Timestamp).toDate(),
             plancha: [
-              for (var a = 0; a < (element["plancha"] as List).length; a++)...[
+              for (var plancha  in element["plancha"] ) ...[
                 Plancha(
-                  columna: [
-                    for (var b = 0; b < (element["plancha"][a]["columna"] as List).length;  b++) ...[
+                  columna: [ 
+                    for (var  columna in plancha["columna"]) ...[
                       Columna(fila: [
-                        for (var i = 0;i < (element["plancha"][a]["columna"][b]["fila"] as List) .length; i++) ...[
+                        for (var  fila in columna["fila"]) ...[
                           Fila(
-                    
-                             
-                            codigo: element["plancha"][a]["columna"][b]["fila"]
-                                [i]["codigo"],
-                            largo: element["plancha"][a]["columna"][b]["fila"]
-                                [i]["largo"],
-                            alto: element["plancha"][a]["columna"][b]["fila"][i]
-                                ["alto"],
-                            cantidad: element["plancha"][a]["columna"][b]
-                                ["fila"][b]["cantidad"],
-                            m2: element["plancha"][a]["columna"][b]["fila"][i]
-                                ["m2"],
+                            codigo: fila["codigo"],
+                            estado: fila["estado"],
+                            largo: fila["largo"],
+                            alto: fila["alto"],
+                            cantidad:fila["cantidad"],
+                            m2: fila["m2"],
                           )
                         ]
                       ])
@@ -74,6 +75,8 @@ class _ProduccionesScreenState extends State<ProduccionesScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+  
     return Scaffold(
       // Import de widgets/appbar_widget (para importar appbar requiere PreferredSize)
       appBar: const PreferredSize(
@@ -121,9 +124,13 @@ class _ProduccionesScreenState extends State<ProduccionesScreen> {
                                           children: [
                                             TextButton(
                                                 onPressed: () {
+
+                                               
+
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute<void>(
                                                           builder: ((context) {
+                                                    
                                                     return DetalleProduccionScreen(
                                                         produccion: produccion);
                                                   })));

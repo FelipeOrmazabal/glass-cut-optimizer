@@ -20,7 +20,7 @@ class _PresupuestosScreenState extends State<PresupuestosScreen> {
     List<Pedido> itemsPresupuesto = [];
 
     QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection("presupuestos").get();
+        await FirebaseFirestore.instance.collection("presupuestos").orderBy("fecha").get();
 
     for (var element in snapshot.docs) {
       itemsPresupuesto.insert(
