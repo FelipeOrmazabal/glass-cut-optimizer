@@ -1,10 +1,10 @@
-# 🏗️ Glass Cut Optimizer
+  Glass Cut Optimizer
 
 Sistema multiplataforma para la gestión de pedidos y optimización de cortes de cristal en la fabricación de termopaneles.
 
 ---
 
-## 📌 Descripción
+  Descripción
 
 Este proyecto fue desarrollado como trabajo de tesis y está orientado a resolver un problema real en la industria del vidrio: **optimizar el uso de planchas de cristal al momento de realizar cortes para pedidos personalizados**.
 
@@ -18,28 +18,28 @@ El sistema permite:
 
 ---
 
-## 🚀 Funcionalidades principales
+  Funcionalidades principales
 
-- 📦 Gestión de pedidos
+  -  Gestión de pedidos
   - Registro de cliente
   - Dimensiones de termopaneles
-- 🔄 Seguimiento de estado
+  - Seguimiento de estado
   - Por hacer
   - En proceso
   - Finalizado
-- ✂️ Optimización de cortes
+  - Optimización de cortes
   - Reducción de desperdicio de material
   - Cálculo automático de distribución de cortes
-- 📊 Visualización de cortes
+  - Visualización de cortes
   - Representación gráfica del uso de planchas
-- 🌐 Multiplataforma
+  - Multiplataforma
   - Aplicación web
   - Aplicación móvil
   - Aplicación de escritorio
 
 ---
 
-## 🧠 Problema que resuelve
+ Problema que resuelve
 
 En la fabricación de termopaneles, los cortes de vidrio suelen generar **pérdidas de material** si no se planifican correctamente.
 
@@ -51,7 +51,7 @@ Este sistema aplica lógica de optimización para:
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+  Tecnologías utilizadas
 
 - **Frontend / UI**
   - Flutter
@@ -67,7 +67,7 @@ Este sistema aplica lógica de optimización para:
 
 ---
 
-## 🖥️ Plataformas soportadas
+  Plataformas soportadas
 
 - Web  
 - Escritorio  
