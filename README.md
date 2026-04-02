@@ -1,16 +1,74 @@
-# termopanelescco
+# 🏗️ Glass Cut Optimizer
 
-A new Flutter project.
+Sistema multiplataforma para la gestión de pedidos y optimización de cortes de cristal en la fabricación de termopaneles.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📌 Descripción
 
-A few resources to get you started if this is your first Flutter project:
+Este proyecto fue desarrollado como trabajo de tesis y está orientado a resolver un problema real en la industria del vidrio: **optimizar el uso de planchas de cristal al momento de realizar cortes para pedidos personalizados**.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+El sistema permite:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Registrar pedidos de clientes
+- Gestionar estados de producción (pendiente, en proceso, finalizado)
+- Calcular y optimizar cortes de vidrio
+- Visualizar gráficamente los cortes a realizar
+- Trabajar en múltiples plataformas (web, escritorio y móvil)
+
+---
+
+## 🚀 Funcionalidades principales
+
+- 📦 Gestión de pedidos
+  - Registro de cliente
+  - Dimensiones de termopaneles
+- 🔄 Seguimiento de estado
+  - Por hacer
+  - En proceso
+  - Finalizado
+- ✂️ Optimización de cortes
+  - Reducción de desperdicio de material
+  - Cálculo automático de distribución de cortes
+- 📊 Visualización de cortes
+  - Representación gráfica del uso de planchas
+- 🌐 Multiplataforma
+  - Aplicación web
+  - Aplicación móvil
+  - Aplicación de escritorio
+
+---
+
+## 🧠 Problema que resuelve
+
+En la fabricación de termopaneles, los cortes de vidrio suelen generar **pérdidas de material** si no se planifican correctamente.
+
+Este sistema aplica lógica de optimización para:
+
+- Minimizar desperdicio
+- Maximizar uso de cada plancha
+- Mejorar eficiencia del proceso productivo
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- **Frontend / UI**
+  - Flutter
+
+- **Lenguaje**
+  - Dart
+
+- **Backend / Base de datos**
+  - Firebase
+
+- **Arquitectura**
+  - Aplicación multiplataforma
+
+---
+
+## 🖥️ Plataformas soportadas
+
+- Web  
+- Escritorio  
+- Móvil  
