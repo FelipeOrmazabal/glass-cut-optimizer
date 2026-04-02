@@ -71,4 +71,21 @@ Este sistema aplica lógica de optimización para:
 
 - Web  
 - Escritorio  
-- Móvil  
+- Móvil
+
+  
+---
+
+ Instalación y ejecución
+
+# Clonar repositorio
+git clone https://github.com/TU_USUARIO/glass-cut-optimizer.git
+
+# Entrar al proyecto
+cd glass-cut-optimizer
+
+# Instalar dependencias
+flutter pub get
+
+# Ejecutar
+flutter run
